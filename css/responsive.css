@@ -124,15 +124,105 @@
   }
 }
 
-/* --- Small Phones to Tablets: 481px–768px --- */
-@media (min-width: 481px) and (max-width: 768px) {
-  .about__grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+/* --- Mobile & Tablet Styles: up to 768px --- */
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    padding: 10px 0;
   }
 
+  .navbar__logo {
+    max-width: 210px;
+  }
+
+  .navbar__logo-image {
+    width: 44px;
+    height: 44px;
+  }
+
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .about__media,
   .about__image {
-    order: -1;
+    order: 1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .about__content,
+  .about__text {
+    order: 2;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .about__media img,
+  .about__image img {
+    width: 100%;
+    max-height: 320px;
+    border-radius: 18px;
+    object-fit: cover;
+  }
+
+  .about__image-badge,
+  .about__badge {
+    position: static;
+    width: fit-content;
+    margin: 16px 0 0;
+    transform: none;
+  }
+
+  .about__content h2,
+  .about__text h2 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    line-height: 1.2;
+  }
+
+  .about__content p,
+  .about__text p {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 18px;
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: left;
+    overflow-wrap: break-word;
+  }
+
+  .about__features {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .virtual-tour-section,
+  .virtual-tour {
+    padding: 56px 16px;
+  }
+
+  .tour-launch {
+    min-height: 320px;
+    padding: 36px 20px;
+    border-radius: 18px;
+  }
+
+  .tour-launch__content p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .tour-launch__button {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .tour-preview__footer,
+  .tour-preview__controls {
+    justify-content: center;
+    padding: 16px;
+    text-align: center;
   }
 
   .advantages__grid {
