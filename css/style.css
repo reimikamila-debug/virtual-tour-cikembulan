@@ -1222,6 +1222,16 @@ h4 {
   height: 24px;
 }
 
+.facility-card__mosque-icon {
+  width: 34px;
+  height: 34px;
+  display: block;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .facility-card__title {
   font-size: var(--fs-small);
   font-weight: 600;
