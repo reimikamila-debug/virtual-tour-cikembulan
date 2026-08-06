@@ -1142,50 +1142,8 @@
      VIRTUAL TOUR
      --------------------------------------------------------------- */
   function initVirtualTour() {
-    const iframe =
-      $('#tour-iframe');
-
-    const fallback =
-      $('.tour-preview__fallback');
-
-    if (!iframe) return;
-
-    const currentSource =
-      iframe.getAttribute('src');
-
-    const dataSource =
-      iframe.dataset.src;
-
-    if (
-      (
-        !currentSource ||
-        currentSource === 'about:blank'
-      ) &&
-      dataSource
-    ) {
-      iframe.src = dataSource;
-    } else if (
-      !currentSource ||
-      currentSource === 'about:blank'
-    ) {
-      iframe.src =
-        VIRTUAL_TOUR_URL;
-    }
-
-    function showFallback() {
-      if (!fallback) return;
-
-      fallback.style.display =
-        'flex';
-
-      iframe.style.display =
-        'none';
-    }
-
-    iframe.addEventListener(
-      'error',
-      showFallback
-    );
+    // Virtual Tour tidak lagi dimuat otomatis pada iframe saat halaman pertama kali dibuka.
+    // Pemutaran dan pembukaan tur dilakukan via tombol "Buka di Tab Baru" atau "Mulai Virtual Tour".
   }
 
   /* ---------------------------------------------------------------

@@ -146,7 +146,12 @@
         </p>
 
         <div class="hero__actions">
-          <a href="#virtual-tour" class="btn btn--primary btn--lg" data-tour-link>
+          <a
+            href="virtual-tour/index.htm?disable-background-preload=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn--primary btn--lg"
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" aria-hidden="true">
               <polygon points="5 3 19 12 5 21 5 3" />
@@ -286,9 +291,10 @@
           <div class="tour-preview__iframe-wrap">
             <iframe
               id="tour-iframe"
-              src="virtual-tour/index.htm?disable-background-preload=true"
+              src="about:blank"
+              data-src="virtual-tour/index.htm?disable-background-preload=true"
               title="Virtual Tour Taman Satwa Cikembulan"
-              allow="autoplay; fullscreen; accelerometer; gyroscope"
+              allow="fullscreen; accelerometer; gyroscope"
               allowfullscreen
             ></iframe>
             <div class="tour-preview__fallback" id="tour-fallback">
@@ -298,11 +304,14 @@
                 <path d="M12 16v-4" />
                 <path d="M12 8h.01" />
               </svg>
-              <p>Virtual tour tidak dapat ditampilkan pada halaman ini. Silakan gunakan tombol <strong>Buka Virtual
-                  Tour</strong> untuk mengaksesnya.</p>
-              <a href="virtual-tour/index.htm?disable-background-preload=true" target="_blank"
-                rel="noopener noreferrer" class="btn btn--secondary btn--sm" data-tour-link>
-                Buka Virtual Tour
+              <p>Klik tombol <strong>Buka di Tab Baru</strong> untuk mulai menjelajahi Virtual Tour Taman Satwa Cikembulan.</p>
+              <a
+                href="virtual-tour/index.htm?disable-background-preload=true"
+                class="btn btn--secondary btn--sm tour-preview__new-tab"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Buka di Tab Baru
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round" aria-hidden="true">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -323,8 +332,13 @@
               <span>Gunakan mouse atau sentuhan jari untuk menjelajahi</span>
             </div>
             <div class="tour-preview__actions">
-              <a href="virtual-tour/index.htm?disable-background-preload=true" target="_blank"
-                rel="noopener noreferrer" class="btn btn--primary btn--sm" id="tour-open-new" data-tour-link>
+              <a
+                href="virtual-tour/index.htm?disable-background-preload=true"
+                class="btn btn--primary btn--sm tour-preview__new-tab"
+                id="tour-open-new"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round" aria-hidden="true">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
