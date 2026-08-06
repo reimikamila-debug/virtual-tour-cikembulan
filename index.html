@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Tour Taman Satwa Cikembulan — Jelajahi Keindahan Satwa Secara Virtual</title>
+  <meta name="description"
+    content="Jelajahi Taman Satwa Cikembulan secara virtual. Kenali berbagai koleksi satwa, fasilitas, dan rencanakan kunjungan Anda melalui virtual tour interaktif.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Virtual Tour Taman Satwa Cikembulan">
+  <meta property="og:description"
+    content="Jelajahi Taman Satwa Cikembulan secara virtual. Kenali koleksi satwa dan rencanakan kunjungan Anda.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:url" content="[URL website]">
+  <meta property="og:image" content="assets/images/hero-bg.png">
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="assets/images/logo-cikembulan.png"
+  >
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="assets/images/logo-cikembulan.png"
+  >
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Logo Navbar -->
+  <style>
+    .navbar__logo-image {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+  </style>
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "Taman Satwa Cikembulan",
+    "description": "Taman satwa di Cikembulan yang menyediakan edukasi dan konservasi satwa untuk keluarga dan masyarakat umum.",
+    "url": "[URL website]",
+    "openingHours": "Mo-Su 09:00-17:00",
+    "isAccessibleForFree": false,
+    "hasMap": "https://maps.app.goo.gl/iENK51gfSACBVNZt9"
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       HEADER & NAVBAR
+       ============================================================ -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="navbar" aria-label="Navigasi Utama">
+        <!-- Logo -->
+        <a href="#beranda" class="navbar__logo" aria-label="Taman Satwa Cikembulan - Kembali ke Beranda">
+          <img src="assets/images/logo-cikembulan.png" alt="Logo Taman Satwa Cikembulan" class="navbar__logo-image">
+          <span class="navbar__logo-text">
+            <span>Taman Satwa</span>
+            <span>Cikembulan</span>
+          </span>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="navbar__menu" id="navbar-menu" role="menubar">
+          <li role="none"><a href="#beranda" class="navbar__link navbar__link--active" role="menuitem">Beranda</a></li>
+          <li role="none"><a href="#virtual-tour" class="navbar__link" role="menuitem">Virtual Tour</a></li>
+          <li role="none"><a href="#galeri" class="navbar__link" role="menuitem">Galeri</a></li>
+          <li role="none"><a href="#fasilitas" class="navbar__link" role="menuitem">Fasilitas</a></li>
+          <li role="none"><a href="#informasi" class="navbar__link" role="menuitem">Info Kunjungan</a></li>
+        </ul>
+
+        <!-- Hamburger Toggle -->
+        <button class="navbar__toggle" id="navbar-toggle" aria-label="Buka menu navigasi" aria-expanded="false"
+          aria-controls="navbar-menu">
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <main>
+    <!-- ============================================================
+         HERO SECTION
+         ============================================================ -->
+    <section class="hero" id="beranda">
+      <video
+        id="hero-video"
+        class="hero__video"
+        autoplay
+        muted
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source
+          id="hero-video-source"
+          src="assets/video/video_intro.mp4"
+          type="video/mp4"
+        >
+      </video>
+
+      <div class="hero__overlay"></div>
+
+      <div class="hero__content">
+        <div class="hero__badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          Virtual Tour Interaktif
+        </div>
+
+        <h1 class="hero__title">Jelajahi Taman Satwa Cikembulan Secara Virtual</h1>
+
+        <p class="hero__desc">
+          Kenali beragam koleksi satwa, jelajahi setiap sudut taman, dan rasakan pengalaman edukasi satwa yang seru —
+          langsung dari perangkat Anda.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#virtual-tour" class="btn btn--primary btn--lg" data-tour-link>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Mulai Virtual Tour
+          </a>
+          <a href="#informasi" class="btn btn--secondary btn--lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4" />
+              <path d="M12 8h.01" />
+            </svg>
+            Lihat Informasi Kunjungan
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__scroll-indicator" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M12 5v14" />
+          <path d="m19 12-7 7-7-7" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TENTANG TAMAN SATWA
+         ============================================================ -->
+    <section class="about" id="tentang">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__image reveal">
+            <img src="assets/images/tentang_taman.jpeg" alt="Suasana Taman Satwa Cikembulan" loading="lazy">
+            <div class="about__image-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path
+                  d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.77 4 4 0 0 1 0 6.76 4 4 0 0 1-4.78 4.77 4 4 0 0 1-6.74 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+              Edukasi & Konservasi
+            </div>
+          </div>
+
+          <div class="about__text reveal">
+            <div class="section-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+              </svg>
+              Tentang Kami
+            </div>
+            <h2 class="section-title">Taman Satwa Cikembulan</h2>
+            <p>
+              Taman Satwa Cikembulan merupakan destinasi edukasi dan rekreasi keluarga yang menghadirkan beragam koleksi
+              satwa dalam lingkungan yang asri dan alami. Taman ini bertujuan memberikan pengalaman belajar tentang
+              keanekaragaman hayati bagi pengunjung dari segala usia.
+            </p>
+            <p>
+              Dengan komitmen terhadap konservasi dan edukasi, Taman Satwa Cikembulan berupaya menjadi sarana pengenalan
+              satwa yang menyenangkan sekaligus bermakna bagi masyarakat dan lingkungan sekitar.
+            </p>
+
+            <div class="about__features">
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <span class="about__feature-text">Edukasi Satwa</span>
+              </div>
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <span class="about__feature-text">Ramah Keluarga</span>
+              </div>
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path
+                      d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.77 4 4 0 0 1 0 6.76 4 4 0 0 1-4.78 4.77 4 4 0 0 1-6.74 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                  </svg>
+                </div>
+                <span class="about__feature-text">Konservasi Alam</span>
+              </div>
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                    <circle cx="9" cy="9" r="2" />
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                  </svg>
+                </div>
+                <span class="about__feature-text">Virtual Tour 360°</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VIRTUAL TOUR 3D VISTA
+         ============================================================ -->
+    <section class="virtual-tour" id="virtual-tour">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Fitur Utama
+          </div>
+          <h2 class="section-title">Virtual Tour 360° Interaktif</h2>
+          <p class="section-desc">Jelajahi Taman Satwa Cikembulan secara virtual melalui tur 360 derajat. Klik, geser,
+            dan temukan berbagai sudut menarik dari taman ini.</p>
+        </div>
+
+        <div class="tour-preview reveal">
+          <div class="tour-preview__iframe-wrap">
+            <iframe
+              id="tour-iframe"
+              src="virtual-tour/index.htm?disable-background-preload=true"
+              title="Virtual Tour Taman Satwa Cikembulan"
+              allow="autoplay; fullscreen; accelerometer; gyroscope"
+              allowfullscreen
+            ></iframe>
+            <div class="tour-preview__fallback" id="tour-fallback">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+              </svg>
+              <p>Virtual tour tidak dapat ditampilkan pada halaman ini. Silakan gunakan tombol <strong>Buka Virtual
+                  Tour</strong> untuk mengaksesnya.</p>
+              <a href="virtual-tour/index.htm?disable-background-preload=true" target="_blank"
+                rel="noopener noreferrer" class="btn btn--secondary btn--sm" data-tour-link>
+                Buka Virtual Tour
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="tour-preview__controls">
+            <div class="tour-preview__info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+              </svg>
+              <span>Gunakan mouse atau sentuhan jari untuk menjelajahi</span>
+            </div>
+            <div class="tour-preview__actions">
+              <a href="virtual-tour/index.htm?disable-background-preload=true" target="_blank"
+                rel="noopener noreferrer" class="btn btn--primary btn--sm" id="tour-open-new" data-tour-link>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                Buka di Tab Baru
+              </a>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         KEUNGGULAN VIRTUAL TOUR
+         ============================================================ -->
+    <section class="advantages" id="keunggulan">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            Keunggulan
+          </div>
+          <h2 class="section-title">Mengapa Mencoba Virtual Tour?</h2>
+          <p class="section-desc">Virtual tour memberikan pengalaman menjelajahi taman satwa yang unik, informatif, dan
+            dapat diakses kapan saja.</p>
+        </div>
+
+        <div class="advantages__grid">
+          <div class="advantage-card reveal reveal--delay-1">
+            <div class="advantage-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="m2 12 4.4 2.2a4 4 0 0 0 3.6 0L12 13l1.6.8" />
+                <path d="M12 2a14.5 14.5 0 0 0 0 20" />
+                <path d="M12 2a14.5 14.5 0 0 1 0 20" />
+              </svg>
+            </div>
+            <h3 class="advantage-card__title">Jelajahi Dari Mana Saja</h3>
+            <p class="advantage-card__text">Nikmati tur virtual taman satwa langsung dari rumah, sekolah, atau di mana
+              pun Anda berada.</p>
+          </div>
+
+          <div class="advantage-card reveal reveal--delay-2">
+            <div class="advantage-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
+                <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+                <path d="M12 20v2" />
+                <path d="M12 14v2" />
+                <path d="M12 8v2" />
+                <path d="M12 2v2" />
+              </svg>
+            </div>
+            <h3 class="advantage-card__title">Kenali Beragam Satwa</h3>
+            <p class="advantage-card__text">Pelajari informasi tentang berbagai jenis satwa yang menjadi penghuni taman
+              secara interaktif.</p>
+          </div>
+
+          <div class="advantage-card reveal reveal--delay-3">
+            <div class="advantage-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <h3 class="advantage-card__title">Pengalaman Interaktif</h3>
+            <p class="advantage-card__text">Navigasi 360° yang mudah digunakan, seolah-olah Anda sedang berjalan
+              langsung di dalam taman.</p>
+          </div>
+
+          <div class="advantage-card reveal reveal--delay-4">
+            <div class="advantage-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </div>
+            <h3 class="advantage-card__title">Rencanakan Kunjungan</h3>
+            <p class="advantage-card__text">Lihat area dan fasilitas terlebih dahulu untuk mempersiapkan kunjungan
+              langsung yang menyenangkan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FASILITAS
+         ============================================================ -->
+    <section class="facilities" id="fasilitas">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
+              <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
+              <path d="M12 3v6" />
+            </svg>
+            Fasilitas
+          </div>
+          <h2 class="section-title">Fasilitas yang Tersedia</h2>
+          <p class="section-desc">Taman Satwa Cikembulan menyediakan berbagai fasilitas untuk kenyamanan pengunjung.</p>
+        </div>
+
+        <div class="facilities__grid">
+          <!-- Parkir -->
+          <div class="facility-card reveal reveal--delay-1">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <rect width="18" height="18" x="3" y="3" rx="2" />
+                <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Area Parkir</h3>
+            <p class="facility-card__note">Luas dan memadai</p>
+          </div>
+
+          <!-- Toilet -->
+          <div class="facility-card reveal reveal--delay-2">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14" />
+                <path d="M2 20h20" />
+                <path d="M14 12v.01" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Toilet</h3>
+            <p class="facility-card__note">Bersih dan terawat</p>
+          </div>
+
+          <!-- Tempat Ibadah -->
+          <div class="facility-card reveal reveal--delay-3">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Tempat Ibadah</h3>
+            <p class="facility-card__note">Mushola tersedia</p>
+          </div>
+
+          <!-- Area Makan -->
+          <div class="facility-card reveal reveal--delay-4">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+                <path d="M7 2v20" />
+                <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Area Makan</h3>
+            <p class="facility-card__note">Kantin & kedai</p>
+          </div>
+
+          <!-- Area Istirahat -->
+          <div class="facility-card reveal">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 4v16" />
+                <path d="M2 8h18a2 2 0 0 1 2 2v10" />
+                <path d="M2 17h20" />
+                <path d="M6 8v9" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Area Istirahat</h3>
+            <p class="facility-card__note">Gazebo & bangku taman</p>
+          </div>
+
+          <!-- Pusat Informasi -->
+          <div class="facility-card reveal">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Pusat Informasi</h3>
+            <p class="facility-card__note">Petugas siap membantu</p>
+          </div>
+
+          <!-- Spot Foto -->
+          <div class="facility-card reveal">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                <circle cx="12" cy="13" r="3" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Spot Foto</h3>
+            <p class="facility-card__note">Berbagai titik menarik</p>
+          </div>
+
+          <!-- Area Edukasi -->
+          <div class="facility-card reveal">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Area Edukasi</h3>
+            <p class="facility-card__note">Belajar tentang satwa</p>
+          </div>
+
+          <!-- Fasilitas Keluarga -->
+          <div class="facility-card reveal">
+            <div class="facility-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3 class="facility-card__title">Fasilitas Keluarga</h3>
+            <p class="facility-card__note">Ramah anak & keluarga</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INFORMASI KUNJUNGAN
+         ============================================================ -->
+    <section class="visit-info" id="informasi">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Informasi
+          </div>
+          <h2 class="section-title">Informasi Kunjungan</h2>
+          <p class="section-desc">Semua yang perlu Anda ketahui sebelum berkunjung ke Taman Satwa Cikembulan.</p>
+        </div>
+
+        <div class="visit-info__grid">
+          <!-- Jam & Tiket -->
+          <div class="info-card reveal">
+            <div class="info-card__header">
+              <div class="info-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <h3 class="info-card__title">Jam Operasional & Tiket</h3>
+            </div>
+            <div class="info-card__row">
+              <span class="info-card__label">Jam Buka</span>
+              <span class="info-card__value">09.00 – 17.00 WIB</span>
+            </div>
+            <div class="info-card__row">
+              <span class="info-card__label">Hari Operasional</span>
+              <span class="info-card__value">Setiap Hari</span>
+            </div>
+            <div class="info-card__row">
+              <span class="info-card__label">Harga Tiket</span>
+              <span class="info-card__value">Rp30.000</span>
+            </div>
+            <div class="info-card__row">
+              <span class="info-card__label">Rombongan</span>
+              <span class="info-card__value">Hubungi pengelola atau <a href="https://www.tiktok.com/@tamansatwa_cikembulan" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); font-weight: 600; text-decoration: underline;">cek TikTok</a></span>
+            </div>
+
+            <ul class="info-card__list" aria-label="Ketentuan kunjungan">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Jaga kebersihan lingkungan taman
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Jangan mengganggu atau memberi makan satwa sembarangan
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Awasi anak-anak selama berada di area taman
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Ikuti petunjuk dan arahan petugas
+              </li>
+            </ul>
+          </div>
+
+          <!-- Kontak & Media Sosial -->
+          <div class="info-card reveal" id="kontak">
+            <div class="info-card__header">
+              <div class="info-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <h3 class="info-card__title">Kontak & Media Sosial</h3>
+            </div>
+
+            <div class="contact-social__intro">
+              <p>
+                Dapatkan informasi terbaru mengenai kegiatan, koleksi satwa, harga tiket, dan pengumuman kunjungan melalui media sosial resmi kami.
+              </p>
+            </div>
+
+            <div class="contact-social__links">
+              <a
+                href="https://www.instagram.com/tamansatwacikembulan_official/"
+                class="social-card"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buka Instagram Taman Satwa Cikembulan"
+              >
+                <span class="social-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </span>
+
+                <span class="social-card__content">
+                  <strong>Instagram</strong>
+                  <span>@tamansatwacikembulan_official</span>
+                </span>
+
+                <span class="social-card__action">Kunjungi</span>
+              </a>
+
+              <a
+                href="https://www.tiktok.com/@tamansatwa_cikembulan"
+                class="social-card"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buka TikTok Taman Satwa Cikembulan"
+              >
+                <span class="social-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                  </svg>
+                </span>
+
+                <span class="social-card__content">
+                  <strong>TikTok</strong>
+                  <span>@tamansatwa_cikembulan</span>
+                </span>
+
+                <span class="social-card__action">Kunjungi</span>
+              </a>
+            </div>
+
+            <p class="contact-social__note">
+              Untuk informasi rombongan dan pembaruan kunjungan, silakan cek akun TikTok resmi Taman Satwa Cikembulan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PETA & LOKASI
+         ============================================================ -->
+    <section class="location" id="lokasi">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            Lokasi
+          </div>
+          <h2 class="section-title">Temukan Kami</h2>
+          <p class="section-desc">Kunjungi Taman Satwa Cikembulan dan rasakan pengalaman melihat satwa secara langsung.
+          </p>
+        </div>
+
+        <div class="location__grid">
+          <div class="location__map reveal">
+            <iframe
+              src="https://www.google.com/maps?q=Jl.%20Cikembulan%2C%20Cikembulan%2C%20Kec.%20Kadungora%2C%20Kabupaten%20Garut%2C%20Jawa%20Barat%2044153&output=embed"
+              title="Lokasi Taman Satwa Cikembulan"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+
+          <div class="location__info reveal">
+            <h3>Taman Satwa Cikembulan</h3>
+
+            <div class="location__address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <p>Jl. Cikembulan, Cikembulan, Kec. Kadungora, Kabupaten Garut, Jawa Barat 44153</p>
+            </div>
+
+            <div class="location__buttons">
+              <a href="https://maps.app.goo.gl/tby5rsyTi2yJUhqB7" target="_blank" rel="noopener noreferrer"
+                class="btn btn--primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Buka di Google Maps
+              </a>
+              <a href="https://www.google.com/maps/dir/?api=1&destination=Jl.%20Cikembulan%2C%20Cikembulan%2C%20Kec.%20Kadungora%2C%20Kabupaten%20Garut%2C%20Jawa%20Barat%2044153" target="_blank" rel="noopener noreferrer"
+                class="btn btn--outline" id="directions-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                </svg>
+                Petunjuk Arah
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         GALERI
+         ============================================================ -->
+    <section class="gallery" id="galeri">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+              <circle cx="9" cy="9" r="2" />
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+            </svg>
+            Galeri
+          </div>
+          <h2 class="section-title">Galeri Taman Satwa</h2>
+          <p class="section-desc">Jelajahi koleksi satwa serta berbagai area dan wahana menarik di Taman Satwa Cikembulan.</p>
+        </div>
+
+        <div class="gallery-filter reveal">
+          <button
+            type="button"
+            class="gallery-filter__btn gallery-filter__btn--active"
+            data-filter="hewan"
+          >
+            Galeri Hewan
+          </button>
+          <button
+            type="button"
+            class="gallery-filter__btn"
+            data-filter="area-wahana"
+          >
+            Area & Wahana
+          </button>
+        </div>
+
+        <div class="gallery__grid" id="gallery-grid">
+          <!-- Rendered by JavaScript -->
+        </div>
+
+        <div class="gallery__load-more" id="gallery-load-more">
+          <button class="gallery__load-more-btn" id="gallery-load-more-btn">
+            Muat Lebih Banyak
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA — AJAKAN BERKUNJUNG
+         ============================================================ -->
+    <section class="cta" id="ajakan">
+      <div class="container">
+        <div class="cta__content reveal">
+          <h2 class="cta__title">Siap Menjelajahi Taman Satwa Cikembulan?</h2>
+          <p class="cta__desc">
+            Mulailah petualangan virtual Anda sekarang juga. Kenali satwa, jelajahi setiap sudut taman, dan rencanakan
+            kunjungan langsung bersama keluarga.
+          </p>
+          <div class="cta__actions">
+            <a href="#virtual-tour" class="btn btn--secondary btn--lg" data-tour-link>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              Jelajahi Sekarang
+            </a>
+            <a href="#lokasi" class="btn btn--outline btn--lg"
+              style="border-color: rgba(255,255,255,0.5); color: rgba(255,255,255,0.9);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Lihat Lokasi
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <!-- Brand -->
+        <div class="footer__column footer__brand">
+          <div class="footer__brand-heading">
+            <img
+              src="assets/images/logo-cikembulan.png"
+              alt="Logo Taman Satwa Cikembulan"
+              class="footer__logo"
+            >
+            <span>Taman Satwa Cikembulan</span>
+          </div>
+
+          <p class="footer__description">
+            Destinasi edukasi dan rekreasi keluarga untuk mengenal keanekaragaman satwa dalam lingkungan yang asri dan alami.
+          </p>
+
+          <div class="footer__socials">
+            <a
+              href="https://www.instagram.com/tamansatwacikembulan_official/"
+              class="footer__social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Taman Satwa Cikembulan"
+            >
+              <span class="footer__social-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </span>
+              <span>@tamansatwacikembulan_official</span>
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@tamansatwa_cikembulan"
+              class="footer__social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok Taman Satwa Cikembulan"
+            >
+              <span class="footer__social-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                </svg>
+              </span>
+              <span>@tamansatwa_cikembulan</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigasi -->
+        <div class="footer__column">
+          <h3>Navigasi</h3>
+          <nav class="footer__links" aria-label="Navigasi Footer">
+            <a href="#beranda">Beranda</a>
+            <a href="#virtual-tour">Virtual Tour</a>
+            <a href="#galeri">Galeri</a>
+            <a href="#fasilitas">Fasilitas</a>
+            <a href="#informasi">Info Kunjungan</a>
+          </nav>
+        </div>
+
+        <!-- Lainnya -->
+        <div class="footer__column">
+          <h3>Lainnya</h3>
+          <nav class="footer__links">
+            <a href="#tentang">Tentang Taman</a>
+            <a href="#lokasi">Lokasi & Peta</a>
+            <a href="https://www.instagram.com/tamansatwacikembulan_official/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@tamansatwa_cikembulan" target="_blank" rel="noopener noreferrer">TikTok</a>
+          </nav>
+        </div>
+
+        <!-- Kontak Footer -->
+        <div class="footer__column">
+          <h3>Kontak</h3>
+          <div class="footer__contact-list">
+            <a
+              href="https://maps.app.goo.gl/tby5rsyTi2yJUhqB7"
+              class="footer__contact-item"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>Jl. Cikembulan, Cikembulan, Kec. Kadungora, Kabupaten Garut, Jawa Barat 44153</span>
+            </a>
+
+            <div class="footer__contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span>09.00–17.00 WIB, Setiap Hari</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">
+          &copy; <span id="copyright-year">2026</span> Taman Satwa Cikembulan. Seluruh hak cipta dilindungi.
+        </p>
+        <a href="#virtual-tour" class="footer__bottom-link" data-tour-link>
+          Buka Virtual Tour
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BACK TO TOP BUTTON
+       ============================================================ -->
+  <button class="back-to-top" id="back-to-top" aria-label="Kembali ke atas">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  </button>
+
+  <!-- ============================================================
+       LIGHTBOX MODAL
+       ============================================================ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Galeri foto" aria-modal="true">
+    <button class="lightbox__close" aria-label="Tutup galeri">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" aria-label="Foto sebelumnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+    <div class="lightbox__content">
+      <div class="lightbox__image"></div>
+      <p class="lightbox__caption"></p>
+    </div>
+    <button class="lightbox__nav lightbox__nav--next" aria-label="Foto berikutnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- ============================================================
+       TOAST NOTIFICATION
+       ============================================================ -->
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="js/script.js" defer></script>
+</body>
+
+</html>
