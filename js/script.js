@@ -1208,7 +1208,12 @@
       iframe.style.height = '100%';
       iframe.style.border = 'none';
 
+      iframe.onerror = function (err) {
+        console.error('[Virtual Tour Embed Error] Gagal memuat iframe Virtual Tour:', err);
+      };
+
       iframe.onload = function () {
+        console.log('[Virtual Tour Embed] Iframe Virtual Tour berhasil dimuat.');
         try {
           const win = iframe.contentWindow;
           if (win) {
