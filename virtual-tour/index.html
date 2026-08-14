@@ -238,39 +238,28 @@
         function onLoad() {
             if (/AppleWebKit/.test(navigator.userAgent) && /Mobile\/\w+/.test(navigator.userAgent))
             {
-                var inIFrame = false;
-                try
+                var onResize = function(async)
                 {
-                    inIFrame = (window.self !== window.top);
-                }
-                catch (e)
-                {
-                    inIFrame = true;
-                }
-                if (!inIFrame)
-                {
-                    var onResize = function(async)
+                    [0, 250, 1000, 2000].forEach(function(delay)
                     {
-                        [0, 250, 1000, 2000].forEach(function(delay)
+                        setTimeout(function()
                         {
-                            setTimeout(function()
-                            {
-                                var viewer = document.querySelector('#viewer');
-                                var scale = window.innerWidth / document.documentElement.clientWidth;
-                                var width = document.documentElement.clientWidth;
-                                var height = Math.round(window.innerHeight / scale);
-                                viewer.style.width = width + 'px';
-                                viewer.style.height = height + 'px';
-                                viewer.style.left = Math.round((window.innerWidth - width) * 0.5) + 'px';
-                                viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
-                                viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
-                                window.scrollTo(0,0);
-                            }, delay);
-                        });
-                    };
-                    window.addEventListener('resize', onResize);
-                    onResize();
-                }
+                            var viewer = document.querySelector('#viewer');
+                            if (!viewer) return;
+                            var scale = window.innerWidth / document.documentElement.clientWidth;
+                            var width = document.documentElement.clientWidth;
+                            var height = Math.round(window.innerHeight / scale);
+                            viewer.style.width = width + 'px';
+                            viewer.style.height = height + 'px';
+                            viewer.style.left = Math.round((window.innerWidth - width) * 0.5) + 'px';
+                            viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
+                            viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
+                            window.scrollTo(0,0);
+                        }, delay);
+                    });
+                };
+                window.addEventListener('resize', onResize);
+                onResize();
             }
 
 
@@ -281,7 +270,7 @@
             }
 
             showPreloader();
-loadTour()
+            loadTour();
         }
 
         function playVideo(video) {
