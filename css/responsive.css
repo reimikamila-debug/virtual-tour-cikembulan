@@ -1,9 +1,537 @@
 /* ================================================================
-   RESPONSIVE STYLES — Mobile First
+   RESPONSIVE STYLES — Mobile First Overrides
    ================================================================ */
 
-/* --- Extra Small: up to 480px --- */
+/* --- Base Overflow & Responsive Safety Defaults --- */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Mobile & Tablet Styles: up to 768px --- */
+@media (max-width: 768px) {
+  /* 1. CONTAINER UTAMA */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+
+  /* 6. TYPOGRAPHY MOBILE (Layar max 768px)
+     - Judul utama ~26px–30px
+     - Subjudul ~20px–24px
+     - Isi teks ~14px–16px
+     - Line-height 1.5–1.7 */
+  h1,
+  .hero__title {
+    font-size: clamp(1.6rem, 6.5vw, 1.85rem); /* ~26px - 30px */
+    line-height: 1.3;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 6vw, 1.85rem); /* ~26px - 30px */
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-desc {
+    font-size: 0.9375rem; /* ~15px */
+    line-height: 1.6;
+    padding: 0 4px;
+    max-width: 100%;
+  }
+
+  h2,
+  .about__content h2,
+  .about__text h2 {
+    font-size: clamp(1.35rem, 5.5vw, 1.6rem); /* ~22px - 26px */
+    line-height: 1.35;
+  }
+
+  h3,
+  .info-card__title,
+  .advantage-card__title,
+  .tour-poster__title {
+    font-size: clamp(1.2rem, 4.5vw, 1.35rem); /* ~20px - 22px */
+    line-height: 1.4;
+  }
+
+  p,
+  .about__content p,
+  .about__text p,
+  .info-card__value,
+  .info-card__label,
+  .advantage-card__text,
+  .facility-card__title,
+  .location__address p {
+    font-size: 0.9375rem; /* ~15px */
+    line-height: 1.6;
+  }
+
+  /* 7. NAVBAR MOBILE */
+  .navbar {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px 0;
+    box-sizing: border-box;
+  }
+
+  .navbar__logo {
+    max-width: 200px;
+    gap: 8px;
+  }
+
+  .navbar__logo-image {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .navbar__logo-text {
+    font-size: 0.85rem;
+    line-height: 1.15;
+  }
+
+  /* HERO SECTION MOBILE */
+  .hero {
+    min-height: calc(100svh - 70px);
+    padding: 72px 16px 48px;
+  }
+
+  .hero__video {
+    object-position: center;
+  }
+
+  .hero__actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ABOUT SECTION MOBILE */
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .about__media,
+  .about__image {
+    order: 1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .about__content,
+  .about__text {
+    order: 2;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .about__media img,
+  .about__image img {
+    width: 100%;
+    max-height: 280px;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
+  .about__image-badge,
+  .about__badge {
+    position: static;
+    width: fit-content;
+    margin: 12px 0 0;
+    transform: none;
+  }
+
+  .about__features {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* 2. SECTION VIRTUAL TOUR MOBILE */
+  .virtual-tour-section,
+  .virtual-tour {
+    padding: 40px 0 24px 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tour-preview {
+    border-radius: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .virtual-tour-embed {
+    height: 420px;
+    min-height: 320px;
+    max-height: 55vh;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .vt-overlay-controls {
+    padding: 10px 12px;
+  }
+
+  .vt-overlay-btn--back {
+    padding: 8px;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+  }
+
+  .vt-overlay-btn__text {
+    display: none;
+  }
+
+  .vt-overlay-btn--audio,
+  .vt-overlay-btn--fullscreen {
+    width: 38px;
+    height: 38px;
+    padding: 8px;
+  }
+
+  .vt-modal__card {
+    padding: 24px 18px;
+    border-radius: 18px;
+    max-width: 90vw;
+  }
+
+  .vt-modal__title {
+    font-size: 1.2rem;
+  }
+
+  .tour-poster {
+    padding: 20px 16px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-size: cover;
+  }
+
+  .tour-poster__content {
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+
+  .tour-poster__badge {
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .tour-poster__badge svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tour-poster__title {
+    font-size: clamp(1.35rem, 5vw, 1.65rem); /* ~22px - 26px */
+    line-height: 1.25;
+  }
+
+  .tour-poster__subtitle {
+    font-size: 0.875rem; /* ~14px */
+    line-height: 1.5;
+    max-width: 95%;
+  }
+
+  .tour-poster__start-btn {
+    margin-top: 6px;
+    padding: 11px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    gap: 8px;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .tour-poster__start-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* 3. BAGIAN "Buka di Tab Baru" MOBILE */
+  .tour-preview__footer,
+  .tour-preview__controls {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 16px;
+    gap: 10px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tour-preview__info {
+    justify-content: center;
+    font-size: 0.8125rem; /* ~13px */
+    line-height: 1.4;
+    gap: 6px;
+    max-width: 100%;
+  }
+
+  .tour-preview__info svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  .tour-preview__actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tour-preview__btn-external {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+    padding: 9px 16px;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .tour-preview__btn-external svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  /* 4. INFO KUNJUNGAN MOBILE */
+  .visit-info,
+  #informasi {
+    padding: 40px 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .visit-info__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .info-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 16px;
+    box-sizing: border-box;
+    border-radius: 16px;
+  }
+
+  .info-card__header {
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .info-card__icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+  }
+
+  .info-card__icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .info-card__title {
+    font-size: 1.2rem;
+  }
+
+  .info-card__row {
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .info-card__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .info-card__value {
+    font-size: 0.875rem;
+    max-width: 65%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .info-card__list {
+    margin-top: 12px;
+  }
+
+  .info-card__list li {
+    padding: 6px 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* 5. INSTAGRAM DAN TIKTOK MOBILE */
+  .contact-social__intro {
+    margin: 12px 0 12px;
+  }
+
+  .contact-social__intro p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .contact-social__links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .social-card {
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    padding: 14px 16px;
+    gap: 12px;
+    box-sizing: border-box;
+    border-radius: 12px;
+  }
+
+  .social-card__icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .social-card__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .social-card__content strong {
+    font-size: 0.9375rem;
+  }
+
+  .social-card__content span {
+    font-size: 0.8125rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .social-card__action {
+    display: none;
+  }
+
+  .contact-social__note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    border-radius: 10px;
+  }
+
+  /* SECTION LAINNYA MOBILE */
+  .advantages__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .developer-section {
+    padding: 36px 16px;
+  }
+
+  .tim-pengembang-wrapper {
+    padding: 10px 10px 15px;
+  }
+
+  .tim-pengembang-img {
+    max-width: 90%;
+    border-radius: 12px;
+  }
+
+  .animals__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .facilities__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .location__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .location__map {
+    min-height: 320px;
+    border-radius: 16px;
+  }
+
+  .location__map iframe {
+    min-height: 320px;
+  }
+
+  .location__buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .location__buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+/* --- Mobile Extra Small: up to 480px --- */
 @media (max-width: 480px) {
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
   .hero__actions {
     flex-direction: column;
     width: 100%;
@@ -19,6 +547,42 @@
 
   .advantages__grid {
     grid-template-columns: 1fr;
+  }
+
+  .virtual-tour-embed {
+    height: 360px;
+    min-height: 280px;
+  }
+
+  .tour-poster__start-btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  /* Fitur Kartu Informasi Jam Operasional & Tiket pada HP Sangat Kecil (320px - 480px) */
+  .info-card {
+    padding: 16px 14px;
+  }
+
+  .info-card__row {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .info-card__label {
+    width: 100%;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+  }
+
+  .info-card__value {
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    color: var(--color-text);
   }
 
   .animals__controls {
@@ -48,15 +612,7 @@
 
   .facilities__grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
-  }
-
-  .visit-info__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .location__grid {
-    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .location__buttons {
@@ -74,7 +630,7 @@
 
   .footer__grid {
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: 24px;
   }
 
   .footer__bottom {
@@ -83,24 +639,7 @@
   }
 
   .tour-preview__controls {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-    gap: var(--space-sm);
-  }
-
-  .tour-preview__info {
-    justify-content: center;
-  }
-
-  .tour-preview__actions {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .tour-preview__actions .btn {
-    width: 100%;
-    justify-content: center;
+    padding: 12px 14px;
   }
 
   .lightbox__nav {
@@ -109,11 +648,11 @@
   }
 
   .lightbox__nav--prev {
-    left: var(--space-sm);
+    left: 8px;
   }
 
   .lightbox__nav--next {
-    right: var(--space-sm);
+    right: 8px;
   }
 
   .back-to-top {
@@ -121,186 +660,6 @@
     right: 1rem;
     width: 42px;
     height: 42px;
-  }
-}
-
-/* --- Mobile & Tablet Styles: up to 768px --- */
-@media (max-width: 768px) {
-  .navbar {
-    width: 100%;
-    padding: 10px 0;
-  }
-
-  .navbar__logo {
-    max-width: 210px;
-  }
-
-  .navbar__logo-image {
-    width: 44px;
-    height: 44px;
-  }
-
-  .about__grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .about__media,
-  .about__image {
-    order: 1;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .about__content,
-  .about__text {
-    order: 2;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .about__media img,
-  .about__image img {
-    width: 100%;
-    max-height: 320px;
-    border-radius: 18px;
-    object-fit: cover;
-  }
-
-  .about__image-badge,
-  .about__badge {
-    position: static;
-    width: fit-content;
-    margin: 16px 0 0;
-    transform: none;
-  }
-
-  .about__content h2,
-  .about__text h2 {
-    font-size: clamp(1.8rem, 8vw, 2.4rem);
-    line-height: 1.2;
-  }
-
-  .about__content p,
-  .about__text p {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 0 18px;
-    font-size: 1rem;
-    line-height: 1.7;
-    text-align: left;
-    overflow-wrap: break-word;
-  }
-
-  .about__features {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .virtual-tour-section,
-  .virtual-tour {
-    padding: 56px 16px;
-  }
-
-  .tour-preview {
-    border-radius: 20px;
-  }
-
-  .virtual-tour-embed {
-    height: 70vh;
-    min-height: 450px;
-    border-radius: 20px 20px 0 0;
-  }
-
-  .vt-overlay-controls {
-    padding: 12px 14px;
-  }
-
-  .vt-overlay-btn--back {
-    padding: 10px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-  }
-
-  .vt-overlay-btn__text {
-    display: none;
-  }
-
-  .vt-overlay-btn--audio,
-  .vt-overlay-btn--fullscreen {
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-  }
-
-  .vt-modal__card {
-    padding: 24px 20px;
-    border-radius: 20px;
-  }
-
-  .vt-modal__title {
-    font-size: 1.25rem;
-  }
-
-  .tour-preview__footer,
-  .tour-preview__controls {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    text-align: center;
-    gap: 12px;
-  }
-
-  .tour-preview__actions {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .tour-preview__btn-external {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .advantages__grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .developer-section {
-    padding: 40px 16px;
-  }
-
-  .tim-pengembang-wrapper {
-    padding: 10px 10px 15px;
-  }
-
-  .tim-pengembang-img {
-    max-width: 85%;
-    border-radius: 12px;
-  }
-
-  .animals__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .facilities__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .visit-info__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .location__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
   }
 }
 
@@ -314,7 +673,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: min(320px, 85vw);
+    width: min(290px, 82vw);
     height: 100vh;
     height: 100dvh;
     background: var(--color-white);
@@ -326,6 +685,7 @@
     transition: transform var(--transition-normal);
     z-index: var(--z-mobile-menu);
     overflow-y: auto;
+    overflow-x: hidden;
     gap: var(--space-xs);
   }
 
