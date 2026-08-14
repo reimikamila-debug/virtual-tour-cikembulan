@@ -1175,15 +1175,23 @@ h4 {
 .tour-preview__btn-external {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
+  gap: 6px;
+  padding: 6px 14px;
   background: var(--color-primary);
   color: #ffffff;
-  border-radius: 8px;
-  font-size: var(--fs-small);
+  border-radius: 6px;
+  font-size: 0.8125rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.tour-preview__btn-external svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .tour-preview__btn-external:hover {

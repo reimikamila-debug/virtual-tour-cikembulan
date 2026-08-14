@@ -317,25 +317,26 @@ iframe {
   }
 
   .tour-preview__btn-external {
-    width: 100%;
-    max-width: 280px;
+    width: auto;
+    max-width: 220px;
     justify-content: center;
-    padding: 9px 16px;
-    font-size: 0.875rem;
+    padding: 7px 14px;
+    font-size: 0.8125rem;
+    border-radius: 6px;
     box-sizing: border-box;
     white-space: nowrap;
   }
 
   .tour-preview__btn-external svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     flex-shrink: 0;
   }
 
   /* 4. INFO KUNJUNGAN MOBILE */
   .visit-info,
   #informasi {
-    padding: 40px 0;
+    padding: 36px 0;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -343,7 +344,7 @@ iframe {
 
   .visit-info__grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -352,73 +353,88 @@ iframe {
   .info-card {
     width: 100%;
     max-width: 100%;
-    padding: 20px 16px;
+    padding: 18px 16px;
     box-sizing: border-box;
-    border-radius: 16px;
+    border-radius: 14px;
   }
 
   .info-card__header {
-    gap: 12px;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
   }
 
   .info-card__icon {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
   }
 
   .info-card__icon svg {
-    width: 19px;
-    height: 19px;
+    width: 18px;
+    height: 18px;
   }
 
   .info-card__title {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
   .info-card__row {
-    padding: 10px 0;
-    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    gap: 8px;
   }
 
   .info-card__label {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 500;
+    color: var(--color-text-light);
+    flex-shrink: 0;
+    min-width: 90px;
   }
 
   .info-card__value {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-align: right;
     max-width: 65%;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 
   .info-card__list {
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .info-card__list li {
-    padding: 6px 0;
-    font-size: 0.875rem;
-    line-height: 1.5;
+    padding: 5px 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    gap: 8px;
+  }
+
+  .info-card__list li svg {
+    width: 14px;
+    height: 14px;
+    margin-top: 2px;
   }
 
   /* 5. INSTAGRAM DAN TIKTOK MOBILE */
   .contact-social__intro {
-    margin: 12px 0 12px;
+    margin: 10px 0 12px;
   }
 
   .contact-social__intro p {
-    font-size: 0.875rem;
-    line-height: 1.6;
+    font-size: 0.8125rem;
+    line-height: 1.5;
   }
 
   .contact-social__links {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
   }
 
@@ -426,30 +442,30 @@ iframe {
     width: 100%;
     max-width: 100%;
     min-height: auto;
-    padding: 14px 16px;
-    gap: 12px;
+    padding: 12px 14px;
+    gap: 10px;
     box-sizing: border-box;
     border-radius: 12px;
   }
 
   .social-card__icon {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
     flex-shrink: 0;
   }
 
   .social-card__icon svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .social-card__content strong {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
   }
 
   .social-card__content span {
-    font-size: 0.8125rem;
+    font-size: 0.775rem;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
@@ -459,9 +475,9 @@ iframe {
   }
 
   .contact-social__note {
-    margin-top: 14px;
-    padding: 12px 14px;
-    font-size: 0.8125rem;
+    margin-top: 12px;
+    padding: 10px 12px;
+    font-size: 0.775rem;
     line-height: 1.5;
     border-radius: 10px;
   }
@@ -560,29 +576,78 @@ iframe {
     width: 100%;
   }
 
+  .tour-preview__btn-external {
+    padding: 6px 12px;
+    font-size: 0.775rem;
+    max-width: 200px;
+  }
+
+  .tour-preview__btn-external svg {
+    width: 13px;
+    height: 13px;
+  }
+
   /* Fitur Kartu Informasi Jam Operasional & Tiket pada HP Sangat Kecil (320px - 480px) */
   .info-card {
-    padding: 16px 14px;
+    padding: 15px 13px;
+    border-radius: 12px;
+  }
+
+  .info-card__header {
+    gap: 8px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .info-card__title {
+    font-size: 1.05rem;
   }
 
   .info-card__row {
-    flex-wrap: wrap;
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 4px;
+    padding: 7px 0;
+    gap: 6px;
   }
 
   .info-card__label {
-    width: 100%;
-    font-weight: 600;
-    color: var(--color-primary-dark);
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    min-width: 85px;
+    flex-shrink: 0;
+    width: auto;
   }
 
   .info-card__value {
-    width: 100%;
-    max-width: 100%;
-    text-align: left;
-    color: var(--color-text);
+    font-size: 0.775rem;
+    font-weight: 600;
+    text-align: right;
+    max-width: 65%;
+    width: auto;
+  }
+
+  .info-card__list li {
+    padding: 4px 0;
+    font-size: 0.775rem;
+  }
+
+  .social-card {
+    padding: 10px 12px;
+  }
+
+  .social-card__content strong {
+    font-size: 0.8125rem;
+  }
+
+  .social-card__content span {
+    font-size: 0.75rem;
+  }
+
+  .contact-social__note {
+    padding: 9px 11px;
+    font-size: 0.75rem;
   }
 
   .animals__controls {
