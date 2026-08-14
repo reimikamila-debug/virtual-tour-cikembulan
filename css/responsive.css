@@ -318,18 +318,18 @@ iframe {
 
   .tour-preview__btn-external {
     width: auto;
-    max-width: 220px;
+    max-width: 190px;
     justify-content: center;
-    padding: 7px 14px;
-    font-size: 0.8125rem;
+    padding: 5px 11px;
+    font-size: 0.775rem;
     border-radius: 6px;
     box-sizing: border-box;
     white-space: nowrap;
   }
 
   .tour-preview__btn-external svg {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     flex-shrink: 0;
   }
 
@@ -577,14 +577,14 @@ iframe {
   }
 
   .tour-preview__btn-external {
-    padding: 6px 12px;
-    font-size: 0.775rem;
-    max-width: 200px;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    max-width: 170px;
   }
 
   .tour-preview__btn-external svg {
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
   }
 
   /* Fitur Kartu Informasi Jam Operasional & Tiket pada HP Sangat Kecil (320px - 480px) */
@@ -912,7 +912,8 @@ iframe {
   }
 
   .tour-preview__btn-external {
-    padding: 10px 18px;
+    padding: 5px 12px;
+    font-size: 0.775rem;
     width: auto;
     min-width: auto;
   }
