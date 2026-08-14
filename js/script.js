@@ -1202,6 +1202,7 @@
       iframe.title = 'Virtual Tour 360° Taman Satwa Cikembulan';
       iframe.setAttribute('allow', 'fullscreen; autoplay');
       iframe.setAttribute('allowfullscreen', 'true');
+      iframe.setAttribute('loading', 'lazy');
       iframe.id = 'vt-iframe';
       iframe.style.width = '100%';
       iframe.style.height = '100%';

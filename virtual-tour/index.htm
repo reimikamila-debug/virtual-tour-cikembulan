@@ -3,7 +3,7 @@
 <head>
     <title>Virtual Tour Taman Satwa Cikembulan</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=0.40, width=device-width, viewport-fit=cover" />
     <link rel="preload" href="script.js?v=1786701585698" as="script"/>
 <link rel="preload" href="media/panorama_6F3448CA_6336_9B15_41C5_0797AA80B968_0/l/2/0_0.jpg?v=1786701585698" as="image"/>
 <link rel="preload" href="media/panorama_6F3448CA_6336_9B15_41C5_0797AA80B968_0/r/2/0_0.jpg?v=1786701585698" as="image"/>
@@ -281,8 +281,20 @@
             }
 
             showPreloader();
-loadTour()
+            loadTour();
         }
+
+        function initMediaPerformanceOptimization() {
+            var mediaElements = document.querySelectorAll('video, audio');
+            mediaElements.forEach(function(media) {
+                media.preload = 'none';
+                if (media.tagName === 'VIDEO') {
+                    media.removeAttribute('autoplay');
+                    media.muted = true;
+                }
+            });
+        }
+        window.addEventListener('DOMContentLoaded', initMediaPerformanceOptimization);
 
         function playVideo(video) {
             function isSafariDesktopV11orGreater() {
