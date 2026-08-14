@@ -246,28 +246,14 @@
                         {
                             var viewer = document.querySelector('#viewer');
                             if (!viewer) return;
-                            var winWidth = window.innerWidth;
-                            var docWidth = document.documentElement.clientWidth;
-
-                            if (winWidth <= 768) {
-                                var targetWidth = winWidth <= 380 ? 740 : 700;
-                                var scale = winWidth / targetWidth;
-                                var height = Math.round(window.innerHeight / scale);
-                                viewer.style.width = targetWidth + 'px';
-                                viewer.style.height = height + 'px';
-                                viewer.style.left = Math.round((winWidth - targetWidth) * 0.5) + 'px';
-                                viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
-                                viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
-                            } else {
-                                var scale = winWidth / docWidth;
-                                var width = docWidth;
-                                var height = Math.round(window.innerHeight / scale);
-                                viewer.style.width = width + 'px';
-                                viewer.style.height = height + 'px';
-                                viewer.style.left = Math.round((winWidth - width) * 0.5) + 'px';
-                                viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
-                                viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
-                            }
+                            var scale = window.innerWidth / document.documentElement.clientWidth;
+                            var width = document.documentElement.clientWidth;
+                            var height = Math.round(window.innerHeight / scale);
+                            viewer.style.width = width + 'px';
+                            viewer.style.height = height + 'px';
+                            viewer.style.left = Math.round((window.innerWidth - width) * 0.5) + 'px';
+                            viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
+                            viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
                             window.scrollTo(0,0);
                         }, delay);
                     });
@@ -275,7 +261,6 @@
                 window.addEventListener('resize', onResize);
                 onResize();
             }
-
 
             if (isOVRWeb()){
                 showPreloader();
@@ -340,114 +325,86 @@
         #viewer { background-color: #FFFFFF; z-index:1; position:absolute; width: 100%; height: 100%; top: 0; }
         #preloadContainer { z-index:2; position:relative; width:100%; height:100%; transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -o-transition: opacity 0.5s;}
 
-        /* Khusus Mobile: Lebar & Ukuran Sidebar Hijau 3DVista */
-        @media (max-width: 768px) {
-            #viewer [id*="Container_A464A822"],
-            #viewer [id*="Container_A464D822"],
-            #viewer [id*="Container_A464E822"],
-            #viewer [id*="Container_A464F822"],
-            #viewer [id*="Container_A4642822"],
-            #viewer [id*="Container_A4670825"],
-            #viewer [id*="Container_A46"] {
-                width: 42vw !important;
-                max-width: 170px !important;
-                min-width: 140px !important;
-            }
-
-            #viewer img[src*="logo"],
-            #viewer [id*="Image_1E18723C"] img,
-            #viewer [id*="Image_ACD186F4"] img {
-                max-width: 100px !important;
-                height: auto !important;
-                margin: 0 auto !important;
-                display: block !important;
-            }
-
-            #viewer [id*="Button_A4644822"],
-            #viewer [id*="Button_A4659822"],
-            #viewer [id*="Button_A465B822"],
-            #viewer [id*="Button_D88EA450"],
-            #viewer [id*="Button_A4658823"],
-            #viewer [id*="Button_A465C823"],
-            #viewer [id*="Button_A465E823"] {
-                font-size: 14px !important;
-                padding-left: 4px !important;
-                padding-right: 4px !important;
-                line-height: 1.2 !important;
-            }
-
-            #viewer [id*="Container_A4645822"],
-            #viewer [id*="Container_A4647822"],
-            #viewer [id*="Container_A4658822"],
-            #viewer [id*="Container_A465A822"] {
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-
-            #viewer [id*="Container_A4651824"],
-            #viewer [id*="Container_A4650824"],
-            #viewer [id*="Button_A4655824"],
-            #viewer [id*="Button_A4657824"],
-            #viewer [id*="Button_A4656824"] {
-                width: 40px !important;
-                height: 40px !important;
-                gap: 8px !important;
-                display: flex !important;
-                flex-wrap: wrap !important;
-            }
-
-            #viewer [id*="Container_A4651824"] img,
-            #viewer [id*="Container_A4650824"] img,
-            #viewer [id*="Button_A4655824"] img,
-            #viewer [id*="Button_A4657824"] img,
-            #viewer [id*="Button_A4656824"] img {
-                width: 38px !important;
-                height: 38px !important;
-            }
-
-            #viewer [id*="Button_A4640824"],
-            #viewer [id*="Button_A4643824"] {
-                width: 44px !important;
-                height: 44px !important;
-            }
-
-            #viewer [id*="Button_A4640824"] img,
-            #viewer [id*="Button_A4643824"] img {
-                width: 44px !important;
-                height: 44px !important;
-            }
+        /* Tombol Kembali ke Website Utama */
+        .vt-back-to-website {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 999999;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            background-color: #669900;
+            color: #ffffff !important;
+            font-family: 'Oswald', system-ui, -apple-system, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        @media (max-width: 380px) {
-            #viewer [id*="Container_A464A822"],
-            #viewer [id*="Container_A464D822"],
-            #viewer [id*="Container_A464E822"],
-            #viewer [id*="Container_A464F822"],
-            #viewer [id*="Container_A4642822"],
-            #viewer [id*="Container_A4670825"],
-            #viewer [id*="Container_A46"] {
-                width: 40vw !important;
-                max-width: 155px !important;
-                min-width: 130px !important;
-            }
+        .vt-back-to-website:hover,
+        .vt-back-to-website:focus {
+            background-color: #558000;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
 
-            #viewer img[src*="logo"],
-            #viewer [id*="Image_1E18723C"] img,
-            #viewer [id*="Image_ACD186F4"] img {
-                max-width: 85px !important;
-            }
+        .vt-back-to-website:active {
+            transform: translateY(0);
+        }
 
-            #viewer [id*="Button_A4644822"],
-            #viewer [id*="Button_A4659822"],
-            #viewer [id*="Button_A465B822"],
-            #viewer [id*="Button_D88EA450"] {
-                font-size: 13px !important;
+        @media (max-width: 768px) {
+            .vt-back-to-website {
+                top: 12px;
+                left: 12px;
+                padding: 7px 14px;
+                font-size: 12px;
+                gap: 6px;
+                border-radius: 24px;
+            }
+            .vt-back-to-website svg {
+                width: 14px;
+                height: 14px;
             }
         }
     </style>
     <link rel="stylesheet" href="fonts.css?v=1786704760989">
 </head>
 <body onload="onLoad()">
+    <a href="../index.html" class="vt-back-to-website" id="vt-back-to-website" title="Kembali ke Website Utama" aria-label="Kembali ke Website Utama">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Kembali</span>
+    </a>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn = document.getElementById('vt-back-to-website');
+            if (btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (window.opener && !window.opener.closed) {
+                        try {
+                            window.opener.focus();
+                            window.close();
+                            return;
+                        } catch(err) {}
+                    }
+                    window.location.href = '../index.html';
+                });
+            }
+        });
+    </script>
     <div id="preloadContainer" style="background-color:rgba(255,255,255,1)"><div style="z-index: 4; position: absolute; left: 0%; top: 50%; width: 100.00%; height: 10.00%"><div style="text-align:left; color:#000; "><DIV STYLE="text-align:center;"><SPAN STYLE="letter-spacing:0vmin;color:#777777;font-size:1.33vmin;font-family:Arial, Helvetica, sans-serif;">Loading virtual tour. Please wait...</SPAN></DIV><p STYLE="margin:0; line-height:0.95vmin;"><BR STYLE="letter-spacing:0vmin;color:#000000;font-size:0.95vmin;font-family:Arial, Helvetica, sans-serif;"/></p></div></div></div>
     <div id="viewer"></div>
 </body>

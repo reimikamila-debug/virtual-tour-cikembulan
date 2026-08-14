@@ -262,123 +262,25 @@
           <h2 class="section-title">Virtual Tour 360° Interaktif</h2>
           <p class="section-desc">Jelajahi Taman Satwa Cikembulan secara virtual melalui tur 360 derajat. Klik, geser,
             dan temukan berbagai sudut menarik dari taman ini.</p>
-        </div>
-
-        <div class="tour-preview reveal" id="tour-container">
-          <div class="virtual-tour-embed" id="virtual-tour-embed">
-            <!-- Floating Overlay Control Bar (hanya aktif saat tour berjalan) -->
-            <div class="vt-overlay-controls" id="vt-overlay-controls" style="display: none;">
-              <!-- Pojok Kiri Atas: Tombol Kembali -->
-              <div class="vt-overlay-controls__left">
-                <button type="button" class="vt-overlay-btn vt-overlay-btn--back" id="vt-btn-back"
-                  title="Tutup Virtual Tour & Kembali ke Preview" aria-label="Kembali">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" aria-hidden="true">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                  </svg>
-                  <span class="vt-overlay-btn__text">Kembali</span>
-                </button>
-              </div>
-
-              <!-- Pojok Kanan Atas: Tombol Mute & Fullscreen -->
-              <div class="vt-overlay-controls__right">
-                <button type="button" class="vt-overlay-btn vt-overlay-btn--audio" id="vt-btn-mute"
-                  title="Matikan/Nyalakan Suara" aria-label="Mute Audio">
-                  <svg class="icon-audio-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  </svg>
-                  <svg class="icon-audio-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                    <path d="M9 9L6 9 2 9 2 15 6 15 11 19 11 13.82"></path>
-                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                  </svg>
-                </button>
-
-                <button type="button" class="vt-overlay-btn vt-overlay-btn--fullscreen" id="vt-btn-fullscreen"
-                  title="Layar Penuh (Fullscreen)" aria-label="Layar Penuh">
-                  <svg class="icon-fullscreen-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path
-                      d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
-                    </path>
-                  </svg>
-                  <svg class="icon-fullscreen-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                    style="display: none;">
-                    <path
-                      d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3">
-                    </path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <!-- Preview Overlay (Lazy loading trigger) -->
-            <div class="tour-poster" id="tour-poster">
-              <div class="tour-poster__backdrop"></div>
-              <div class="tour-poster__content">
-                <div class="tour-poster__badge">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                    <path d="M2 12h20" />
-                  </svg>
-                  <span>Pengalaman Virtual 360°</span>
-                </div>
-                <h3 class="tour-poster__title">Jelajahi Taman Satwa Cikembulan</h3>
-                <p class="tour-poster__subtitle">Nikmati tur interaktif 360 derajat dengan lanskap panorama dan edukasi
-                  satwa secara langsung</p>
-                <button type="button" class="btn btn--primary btn--lg tour-poster__start-btn" id="start-tour-btn"
-                  aria-label="Mulai Virtual Tour 360°">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" aria-hidden="true">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                  Mulai Virtual Tour
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="tour-preview__controls">
-            <div class="tour-preview__info">
+          <div class="virtual-tour__cta-wrapper" style="margin-top: 2rem; display: flex; justify-content: center;">
+            <button type="button" class="btn btn--primary btn--lg tour-poster__start-btn" id="start-tour-btn"
+              aria-label="Mulai Virtual Tour 360°">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4" />
-                <path d="M12 8h.01" />
+                <polygon points="5 3 19 12 5 21 5 3" />
               </svg>
-              <span>Gunakan mouse atau sentuhan jari untuk menjelajahi 360°</span>
-            </div>
-            <div class="tour-preview__actions">
-              <a href="virtual-tour/index.htm" target="_blank" rel="noopener noreferrer"
-                class="tour-preview__btn-external">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" aria-hidden="true">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                Buka di Tab Baru
-              </a>
-            </div>
+              Mulai Virtual Tour
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Modal Konfirmasi Virtual Tour & Audio (2-Tahap) -->
+    <!-- Modal Konfirmasi Virtual Tour -->
     <div class="vt-modal" id="vt-confirm-modal" aria-hidden="true" role="dialog" aria-labelledby="vt-modal-title-1"
       aria-describedby="vt-modal-desc-1">
       <div class="vt-modal__backdrop" id="vt-modal-backdrop"></div>
       <div class="vt-modal__card">
-
-        <!-- TAHAP 1: Konfirmasi Mulai -->
         <div class="vt-modal__step vt-modal__step--active" id="vt-modal-step-1">
           <div class="vt-modal__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -395,25 +297,6 @@
               id="vt-btn-yes">Ya</button>
           </div>
         </div>
-
-        <!-- TAHAP 2: Konfirmasi Audio -->
-        <div class="vt-modal__step" id="vt-modal-step-2" style="display: none;">
-          <div class="vt-modal__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" aria-hidden="true">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            </svg>
-          </div>
-          <h3 class="vt-modal__title" id="vt-modal-title-2">Pengaturan Suara</h3>
-          <p class="vt-modal__desc" id="vt-modal-desc-2">Aktifkan audio?</p>
-          <div class="vt-modal__actions">
-            <button type="button" class="btn vt-modal__btn vt-modal__btn--cancel" id="vt-btn-audio-no">TIDAK</button>
-            <button type="button" class="btn btn--primary vt-modal__btn vt-modal__btn--start"
-              id="vt-btn-audio-yes">YA</button>
-          </div>
-        </div>
-
       </div>
     </div>
 

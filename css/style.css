@@ -811,22 +811,6 @@ h4 {
   background: #14552f;
 }
 
-.virtual-tour-embed iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-/* Fullscreen Mode State */
-.virtual-tour-embed:fullscreen,
-.virtual-tour-embed:-webkit-full-screen {
-  width: 100vw;
-  height: 100vh;
-  border-radius: 0;
-  background: #000000;
-}
-
 /* Floating Overlay Controls Bar */
 .vt-overlay-controls {
   position: absolute;
