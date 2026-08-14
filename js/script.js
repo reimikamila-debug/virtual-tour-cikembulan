@@ -137,7 +137,7 @@
     },
     {
       id: 22,
-      src: 'assets/images/gallery/Binturong.Jpeg',
+      src: 'assets/images/gallery/Binturong.peg',
       alt: 'Binturong di Taman Satwa Cikembulan',
       caption: 'Binturong'
     },
@@ -298,7 +298,7 @@
      VIRTUAL TOUR CONFIG
      --------------------------------------------------------------- */
   const VIRTUAL_TOUR_URL =
-    'virtual-tour/index.htm?disable-background-preload=true';
+    'virtual-tour/index.htm';
 
   /* ---------------------------------------------------------------
      DOM HELPERS
@@ -1139,11 +1139,368 @@
   }
 
   /* ---------------------------------------------------------------
-     VIRTUAL TOUR
+     VIRTUAL TOUR (LAZY LOADING, 2-STAGE CONFIRMATION MODAL, CONTROLS)
      --------------------------------------------------------------- */
   function initVirtualTour() {
-    // Virtual Tour tidak lagi dimuat otomatis pada iframe saat halaman pertama kali dibuka.
-    // Pemutaran dan pembukaan tur dilakukan via tombol "Buka di Tab Baru" atau "Mulai Virtual Tour".
+    const startBtn = $('#start-tour-btn');
+    const tourEmbed = $('#virtual-tour-embed');
+    const tourPoster = $('#tour-poster');
+    const overlayControls = $('#vt-overlay-controls');
+    const backBtn = $('#vt-btn-back');
+    const muteBtn = $('#vt-btn-mute');
+    const fullscreenBtn = $('#vt-btn-fullscreen');
+
+    // Modal elements (2-Tahap)
+    const confirmModal = $('#vt-confirm-modal');
+    const modalBackdrop = $('#vt-modal-backdrop');
+    const step1 = $('#vt-modal-step-1');
+    const step2 = $('#vt-modal-step-2');
+
+    const btnCancel = $('#vt-btn-cancel');
+    const btnYes = $('#vt-btn-yes');
+    const btnAudioNo = $('#vt-btn-audio-no');
+    const btnAudioYes = $('#vt-btn-audio-yes');
+
+    let isLoaded = false;
+    let isMuted = false;
+
+    // Open Modal Step 1 ("Apakah Anda ingin memulai Virtual Tour?")
+    function openStep1() {
+      if (!confirmModal) return;
+      if (step1) step1.style.display = 'block';
+      if (step2) step2.style.display = 'none';
+      confirmModal.classList.add('vt-modal--active');
+      confirmModal.setAttribute('aria-hidden', 'false');
+    }
+
+    // Go to Modal Step 2 ("Aktifkan audio?")
+    function goToStep2() {
+      if (step1) step1.style.display = 'none';
+      if (step2) step2.style.display = 'block';
+    }
+
+    // Close Modal
+    function closeModal() {
+      if (!confirmModal) return;
+      confirmModal.classList.remove('vt-modal--active');
+      confirmModal.setAttribute('aria-hidden', 'true');
+      setTimeout(() => {
+        if (step1) step1.style.display = 'block';
+        if (step2) step2.style.display = 'none';
+      }, 300);
+    }
+
+    // Load Virtual Tour iframe with audio setting
+    function loadVirtualTour(enableAudio) {
+      if (isLoaded || !tourEmbed) return;
+
+      isMuted = !enableAudio;
+      updateMuteUI(isMuted);
+
+      const iframe = document.createElement('iframe');
+      iframe.src = VIRTUAL_TOUR_URL;
+      iframe.title = 'Virtual Tour 360° Taman Satwa Cikembulan';
+      iframe.setAttribute('allow', 'fullscreen; autoplay');
+      iframe.setAttribute('allowfullscreen', 'true');
+      iframe.id = 'vt-iframe';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+
+      iframe.onload = function () {
+        try {
+          const win = iframe.contentWindow;
+          if (win) {
+            if (!enableAudio) {
+              const applyMute = function () {
+                if (typeof win.pauseTour === 'function') {
+                  win.pauseTour();
+                }
+                if (win.tdvplayer && typeof win.tdvplayer.getById === 'function') {
+                  const pauseAudios = win.tdvplayer.getById('pauseGlobalAudios');
+                  if (typeof pauseAudios === 'function') pauseAudios();
+                }
+                const doc = win.document;
+                if (doc) {
+                  const mediaElements = doc.querySelectorAll('audio, video');
+                  mediaElements.forEach((m) => {
+                    m.muted = true;
+                    m.pause();
+                  });
+                }
+              };
+
+              if (win.tdvplayer) {
+                setTimeout(applyMute, 200);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(() => {
+                  attempts++;
+                  if (win.tdvplayer) {
+                    clearInterval(timer);
+                    setTimeout(applyMute, 200);
+                  } else if (attempts > 30) {
+                    clearInterval(timer);
+                  }
+                }, 100);
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Mute setup warning:', e);
+        }
+      };
+
+      // Hide poster & show overlay controls
+      if (tourPoster) {
+        tourPoster.style.transition = 'opacity 0.4s ease';
+        tourPoster.style.opacity = '0';
+        setTimeout(() => {
+          tourPoster.style.display = 'none';
+          tourEmbed.appendChild(iframe);
+          if (overlayControls) {
+            overlayControls.style.display = 'flex';
+            overlayControls.style.opacity = '1';
+          }
+        }, 400);
+      } else {
+        tourEmbed.appendChild(iframe);
+        if (overlayControls) {
+          overlayControls.style.display = 'flex';
+          overlayControls.style.opacity = '1';
+        }
+      }
+
+      isLoaded = true;
+    }
+
+    // Close Virtual Tour & Reset to Poster Preview
+    function closeVirtualTour() {
+      if (!isLoaded || !tourEmbed) return;
+
+      if (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.msFullscreenElement
+      ) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
+
+      if (overlayControls) {
+        overlayControls.style.display = 'none';
+      }
+
+      const iframe = $('#vt-iframe', tourEmbed);
+      if (iframe) {
+        iframe.remove();
+      }
+
+      if (tourPoster) {
+        tourPoster.style.display = 'flex';
+        setTimeout(() => {
+          tourPoster.style.opacity = '1';
+        }, 10);
+      }
+
+      isLoaded = false;
+      isMuted = false;
+      updateMuteUI(false);
+    }
+
+    // Multi-Tiered Mute / Unmute Audio Toggle for Top-Right Button
+    function toggleMute() {
+      const iframe = $('#vt-iframe', tourEmbed);
+      isMuted = !isMuted;
+
+      if (iframe && iframe.contentWindow) {
+        try {
+          const win = iframe.contentWindow;
+
+          // Tier 1: 3DVista native pauseTour / resumeTour or postMessage
+          if (isMuted) {
+            if (typeof win.pauseTour === 'function') {
+              win.pauseTour();
+            } else {
+              win.postMessage('pauseTour', '*');
+            }
+
+            if (win.tdvplayer && typeof win.tdvplayer.getById === 'function') {
+              const pauseAudios = win.tdvplayer.getById('pauseGlobalAudios');
+              if (typeof pauseAudios === 'function') pauseAudios();
+            }
+          } else {
+            if (typeof win.resumeTour === 'function') {
+              win.resumeTour();
+            } else {
+              win.postMessage('resumeTour', '*');
+            }
+
+            if (win.tdvplayer && typeof win.tdvplayer.getById === 'function') {
+              const resumeAudios = win.tdvplayer.getById('resumeGlobalAudios');
+              if (typeof resumeAudios === 'function') resumeAudios();
+            }
+          }
+
+          // Tier 2: HTML5 Media Element Control inside iframe document
+          const doc = win.document;
+          if (doc) {
+            const mediaElements = doc.querySelectorAll('audio, video');
+            mediaElements.forEach((media) => {
+              media.muted = isMuted;
+              if (isMuted) {
+                media.pause();
+              } else {
+                media.play().catch(() => {});
+              }
+            });
+          }
+
+          // Tier 3: Web Audio API Context Control
+          const AudioContextClass = win.AudioContext || win.webkitAudioContext;
+          if (AudioContextClass) {
+            for (let prop in win) {
+              try {
+                if (win[prop] && win[prop] instanceof AudioContextClass) {
+                  if (isMuted && typeof win[prop].suspend === 'function') {
+                    win[prop].suspend();
+                  } else if (!isMuted && typeof win[prop].resume === 'function') {
+                    win[prop].resume();
+                  }
+                }
+              } catch (e) {}
+            }
+          }
+        } catch (e) {
+          console.warn('Gagal mengontrol audio iframe 3DVista:', e);
+        }
+      }
+
+      updateMuteUI(isMuted);
+    }
+
+    function updateMuteUI(muted) {
+      if (!muteBtn) return;
+      const iconOn = $('.icon-audio-on', muteBtn);
+      const iconOff = $('.icon-audio-off', muteBtn);
+      if (iconOn && iconOff) {
+        iconOn.style.display = muted ? 'none' : 'block';
+        iconOff.style.display = muted ? 'block' : 'none';
+      }
+      muteBtn.setAttribute('title', muted ? 'Nyalakan Suara' : 'Matikan Suara');
+      muteBtn.setAttribute('aria-label', muted ? 'Nyalakan Suara' : 'Matikan Suara');
+    }
+
+    // Event Listeners for Poster & Modal
+    if (startBtn) {
+      startBtn.addEventListener('click', openStep1);
+    }
+
+    if (btnCancel) {
+      btnCancel.addEventListener('click', closeModal);
+    }
+
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', closeModal);
+    }
+
+    if (btnYes) {
+      btnYes.addEventListener('click', goToStep2);
+    }
+
+    if (btnAudioYes) {
+      btnAudioYes.addEventListener('click', () => {
+        closeModal();
+        loadVirtualTour(true);
+      });
+    }
+
+    if (btnAudioNo) {
+      btnAudioNo.addEventListener('click', () => {
+        closeModal();
+        loadVirtualTour(false);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.key === 'Escape' &&
+        confirmModal &&
+        confirmModal.classList.contains('vt-modal--active')
+      ) {
+        closeModal();
+      }
+    });
+
+    if (backBtn) {
+      backBtn.addEventListener('click', closeVirtualTour);
+    }
+
+    if (muteBtn) {
+      muteBtn.addEventListener('click', toggleMute);
+    }
+
+    // Fullscreen Handling
+    if (fullscreenBtn && tourEmbed) {
+      fullscreenBtn.addEventListener('click', () => {
+        if (!isLoaded) {
+          openStep1();
+          return;
+        }
+
+        const isFullscreen = Boolean(
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.msFullscreenElement
+        );
+
+        if (!isFullscreen) {
+          if (tourEmbed.requestFullscreen) {
+            tourEmbed.requestFullscreen();
+          } else if (tourEmbed.webkitRequestFullscreen) {
+            tourEmbed.webkitRequestFullscreen();
+          } else if (tourEmbed.msRequestFullscreen) {
+            tourEmbed.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+      });
+
+      function updateFullscreenUI() {
+        const isFS = Boolean(
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.msFullscreenElement
+        );
+        const iconEnter = $('.icon-fullscreen-enter', fullscreenBtn);
+        const iconExit = $('.icon-fullscreen-exit', fullscreenBtn);
+
+        if (iconEnter && iconExit) {
+          iconEnter.style.display = isFS ? 'none' : 'block';
+          iconExit.style.display = isFS ? 'block' : 'none';
+        }
+        fullscreenBtn.setAttribute(
+          'title',
+          isFS ? 'Keluar Layar Penuh' : 'Layar Penuh'
+        );
+      }
+
+      document.addEventListener('fullscreenchange', updateFullscreenUI);
+      document.addEventListener('webkitfullscreenchange', updateFullscreenUI);
+      document.addEventListener('msfullscreenchange', updateFullscreenUI);
+    }
   }
 
   /* ---------------------------------------------------------------

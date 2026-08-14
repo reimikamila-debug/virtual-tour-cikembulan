@@ -796,75 +796,328 @@ h4 {
 
 .tour-preview {
   background: var(--color-white);
-  border-radius: var(--radius-lg);
+  border-radius: 30px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
 }
 
-.tour-launch {
-  display: grid;
-  place-items: center;
-  min-height: 430px;
-  padding: 48px 24px;
-  border-radius: 24px;
+.virtual-tour-embed {
+  position: relative;
+  width: 100%;
+  height: 650px;
+  border-radius: 30px 30px 0 0;
+  overflow: hidden;
   background: #14552f;
 }
 
-.tour-launch__content {
-  width: min(100%, 520px);
-  text-align: center;
-  color: #ffffff;
+.virtual-tour-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
-.tour-launch__icon {
-  display: inline-flex;
+/* Fullscreen Mode State */
+.virtual-tour-embed:fullscreen,
+.virtual-tour-embed:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  background: #000000;
+}
+
+/* Floating Overlay Controls Bar */
+.vt-overlay-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  margin-bottom: 16px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  color: #ffffff;
+  z-index: 25;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-.tour-launch__icon svg {
-  width: 32px;
-  height: 32px;
+.vt-overlay-controls__left,
+.vt-overlay-controls__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
 }
 
-.tour-launch__content p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 0;
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.tour-launch__button {
+.vt-overlay-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 52px;
-  margin-top: 22px;
-  padding: 14px 24px;
-  border: 2px solid #ffffff;
-  border-radius: 12px;
+  padding: 10px 18px;
+  background: rgba(20, 85, 47, 0.88);
   color: #ffffff;
-  text-decoration: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  user-select: none;
+}
+
+.vt-overlay-btn:hover {
+  background: var(--color-primary-dark);
+  border-color: #a8e063;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.vt-overlay-btn:active {
+  transform: translateY(0);
+}
+
+.vt-overlay-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.2px;
+}
+
+.vt-overlay-btn--audio,
+.vt-overlay-btn--fullscreen {
+  padding: 10px;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+}
+
+/* ================================================================
+   MODAL KONFIRMASI VIRTUAL TOUR & AUDIO (2-TAHAP)
+   ================================================================ */
+.vt-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.vt-modal--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vt-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 30, 15, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.vt-modal__card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--color-border);
+  transform: scale(0.9) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.vt-modal--active .vt-modal__card {
+  transform: scale(1) translateY(0);
+}
+
+.vt-modal__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px auto;
+  border-radius: 50%;
+  background: var(--color-light-green);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vt-modal__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.vt-modal__title {
+  font-size: 1.4rem;
   font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0 0 10px 0;
+}
+
+.vt-modal__desc {
+  font-size: var(--fs-body);
+  color: var(--color-text-light);
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.vt-modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.vt-modal__btn {
+  flex: 1;
+  padding: 12px 24px;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.tour-launch__button:hover {
-  background: #ffffff;
-  color: #14552f;
+.vt-modal__btn--cancel {
+  background: #f0f0f0;
+  color: #555555;
+  border: 1px solid #e0e0e0;
+}
+
+.vt-modal__btn--cancel:hover {
+  background: #e4e4e4;
+  color: #222222;
+}
+
+.vt-modal__btn--start {
+  background: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 15px rgba(20, 85, 47, 0.3);
+}
+
+.vt-modal__btn--start:hover {
+  background: var(--color-primary-dark);
+  box-shadow: 0 6px 20px rgba(20, 85, 47, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Poster Preview Overlay */
+.tour-poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  background: radial-gradient(circle at center, rgba(20, 85, 47, 0.75) 0%, rgba(10, 40, 20, 0.92) 100%),
+              url('../assets/images/gallery/macan_tutul.jpeg') center/cover no-repeat;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.tour-poster__backdrop {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+.tour-poster__content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  color: #ffffff;
+}
+
+.tour-poster__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+  color: #a8e063;
+}
+
+.tour-poster__badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tour-poster__title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.tour-poster__subtitle {
+  font-size: var(--fs-body);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.tour-poster__start-btn {
+  margin-top: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.tour-poster__start-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(46, 125, 50, 0.5);
+  background: var(--color-primary-dark);
+}
+
+.tour-poster__start-btn svg {
+  width: 22px;
+  height: 22px;
 }
 
 .tour-preview__controls {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: var(--space-md) var(--space-lg);
   background: var(--color-cream);
   flex-wrap: wrap;
@@ -883,6 +1136,59 @@ h4 {
   width: 16px;
   height: 16px;
   color: var(--color-primary);
+}
+
+.tour-preview__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.tour-preview__btn-fullscreen {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--color-white);
+  color: var(--color-text-dark);
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tour-preview__btn-fullscreen:hover {
+  background: var(--color-light-green);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.tour-preview__btn-fullscreen svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tour-preview__btn-external {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tour-preview__btn-external:hover {
+  background: var(--color-primary-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 /* ================================================================
@@ -2123,4 +2429,44 @@ h4 {
 
 .reveal--delay-4 {
   transition-delay: 0.4s;
+}
+
+/* ================================================================
+   DEVELOPER / TIM PENGEMBANG SECTION
+   ================================================================ */
+.developer-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-light-green) 100%);
+}
+
+.developer-section .section-title {
+  margin-bottom: 15px;
+}
+
+.developer-section .section-desc {
+  max-width: 750px;
+  margin: 0 auto 30px;
+}
+
+.tim-pengembang-wrapper {
+  text-align: center;
+  padding: 10px 20px 20px;
+}
+
+.tim-pengembang-img {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tim-pengembang-img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }

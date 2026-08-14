@@ -202,31 +202,84 @@
     padding: 56px 16px;
   }
 
-  .tour-launch {
-    min-height: 320px;
-    padding: 36px 20px;
-    border-radius: 18px;
+  .tour-preview {
+    border-radius: 20px;
   }
 
-  .tour-launch__content p {
-    font-size: 0.95rem;
-    line-height: 1.65;
+  .virtual-tour-embed {
+    height: 70vh;
+    min-height: 450px;
+    border-radius: 20px 20px 0 0;
   }
 
-  .tour-launch__button {
-    width: 100%;
-    max-width: 280px;
+  .vt-overlay-controls {
+    padding: 12px 14px;
+  }
+
+  .vt-overlay-btn--back {
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .vt-overlay-btn__text {
+    display: none;
+  }
+
+  .vt-overlay-btn--audio,
+  .vt-overlay-btn--fullscreen {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+  }
+
+  .vt-modal__card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .vt-modal__title {
+    font-size: 1.25rem;
   }
 
   .tour-preview__footer,
   .tour-preview__controls {
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     padding: 16px;
     text-align: center;
+    gap: 12px;
+  }
+
+  .tour-preview__actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tour-preview__btn-external {
+    width: 100%;
+    justify-content: center;
   }
 
   .advantages__grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .developer-section {
+    padding: 40px 16px;
+  }
+
+  .tim-pengembang-wrapper {
+    padding: 10px 10px 15px;
+  }
+
+  .tim-pengembang-img {
+    max-width: 85%;
+    border-radius: 12px;
   }
 
   .animals__grid {
@@ -306,6 +359,12 @@
   .menu-overlay--active {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+@media (min-width: 768px) {
+  .tim-pengembang-img {
+    max-width: 380px;
   }
 }
 
