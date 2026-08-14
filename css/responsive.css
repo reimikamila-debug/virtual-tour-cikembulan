@@ -796,6 +796,110 @@ iframe {
   }
 }
 
+/* ================================================================
+   RESPONSIVE KHUSUS LAPTOP & DESKTOP (VIRTUAL TOUR SECTION)
+   ================================================================ */
+
+/* --- Laptop Screen: 769px to 1440px --- */
+@media (min-width: 769px) and (max-width: 1440px) {
+  .virtual-tour .container {
+    width: calc(100% - 60px);
+    max-width: 1150px;
+    margin: 0 auto;
+  }
+
+  .virtual-tour-embed {
+    height: clamp(400px, 48vh, 480px);
+    min-height: 420px;
+  }
+
+  .tour-poster {
+    padding: 35px 30px;
+  }
+
+  .tour-poster__content {
+    max-width: 650px;
+    gap: 12px;
+  }
+
+  .tour-poster__title {
+    font-size: clamp(28px, 2.4vw, 36px);
+    line-height: 1.15;
+  }
+
+  .tour-poster__subtitle {
+    font-size: 0.95rem;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  .tour-poster__start-btn {
+    padding: 13px 26px;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+
+  .tour-preview__controls {
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tour-preview__btn-external {
+    padding: 10px 18px;
+    width: auto;
+    min-width: auto;
+  }
+}
+
+/* --- Large Desktop: 1441px+ --- */
+@media (min-width: 1441px) {
+  .virtual-tour .container {
+    width: calc(100% - 80px);
+    max-width: 1250px;
+    margin: 0 auto;
+  }
+
+  .virtual-tour-embed {
+    height: clamp(440px, 52vh, 520px);
+    min-height: 460px;
+  }
+
+  .tour-poster {
+    padding: 45px 40px;
+  }
+
+  .tour-poster__content {
+    max-width: 700px;
+    gap: 14px;
+  }
+
+  .tour-poster__title {
+    font-size: clamp(32px, 2.5vw, 42px);
+    line-height: 1.15;
+  }
+
+  .tour-poster__subtitle {
+    font-size: 1.05rem;
+    max-width: 650px;
+    line-height: 1.5;
+  }
+
+  .tour-poster__start-btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+
+  .tour-preview__controls {
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
 /* --- Print styles --- */
 @media print {
   .header,
