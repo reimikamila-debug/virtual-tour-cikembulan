@@ -1197,12 +1197,28 @@
       isMuted = !enableAudio;
       updateMuteUI(isMuted);
 
+      // URUTAN WAJIB:
+      // 1. Buat/aktifkan container fullscreen mobile/overlay terlebih dahulu agar ukurannya sudah 100vw x 100dvh
+      tourEmbed.classList.add('virtual-tour-active-container', 'virtual-tour-embed--active');
+
+      if (tourPoster) {
+        tourPoster.style.display = 'none';
+      }
+
+      if (overlayControls) {
+        overlayControls.style.display = 'flex';
+        overlayControls.style.opacity = '1';
+      }
+
+      // Flush layout agar browser memproses dimensi container 100vw x 100dvh sebelum iframe dimuat
+      void tourEmbed.offsetHeight;
+
+      // 2. BARU buat elemen iframe dan atur src ke Virtual Tour 3DVista
       const iframe = document.createElement('iframe');
-      iframe.src = VIRTUAL_TOUR_URL;
       iframe.title = 'Virtual Tour 360° Taman Satwa Cikembulan';
       iframe.setAttribute('allow', 'fullscreen; autoplay');
       iframe.setAttribute('allowfullscreen', 'true');
-      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('loading', 'eager');
       iframe.id = 'vt-iframe';
       iframe.style.width = '100%';
       iframe.style.height = '100%';
@@ -1214,6 +1230,14 @@
 
       iframe.onload = function () {
         console.log('[Virtual Tour Embed] Iframe Virtual Tour berhasil dimuat.');
+        try {
+          if (iframe.contentWindow) {
+            iframe.contentWindow.dispatchEvent(new Event('resize'));
+          }
+        } catch (e) {
+          console.log(e);
+        }
+
         try {
           const win = iframe.contentWindow;
           if (win) {
@@ -1257,28 +1281,31 @@
         }
       };
 
-      // Hide poster & show overlay controls
-      if (tourPoster) {
-        tourPoster.style.transition = 'opacity 0.4s ease';
-        tourPoster.style.opacity = '0';
-        setTimeout(() => {
-          tourPoster.style.display = 'none';
-          tourEmbed.appendChild(iframe);
-          if (overlayControls) {
-            overlayControls.style.display = 'flex';
-            overlayControls.style.opacity = '1';
-          }
-        }, 400);
-      } else {
-        tourEmbed.appendChild(iframe);
-        if (overlayControls) {
-          overlayControls.style.display = 'flex';
-          overlayControls.style.opacity = '1';
-        }
-      }
+      // Set src dan masukkan iframe ke container yang ukurannya sudah 100vw x 100dvh
+      iframe.src = VIRTUAL_TOUR_URL;
+      tourEmbed.appendChild(iframe);
 
       isLoaded = true;
     }
+
+    // Event listener resize & orientationchange untuk menghitung ulang layout saat layar diputar
+    window.addEventListener('resize', () => {
+      const iframe = document.getElementById('vt-iframe');
+      if (iframe && iframe.contentWindow) {
+        try {
+          iframe.contentWindow.dispatchEvent(new Event('resize'));
+        } catch (e) {}
+      }
+    });
+
+    window.addEventListener('orientationchange', () => {
+      const iframe = document.getElementById('vt-iframe');
+      if (iframe && iframe.contentWindow) {
+        try {
+          iframe.contentWindow.dispatchEvent(new Event('resize'));
+        } catch (e) {}
+      }
+    });
 
     // Close Virtual Tour & Reset to Poster Preview
     function closeVirtualTour() {
@@ -1306,6 +1333,9 @@
       if (iframe) {
         iframe.remove();
       }
+
+      // Hapus kelas active container agar layout kembali seperti semula
+      tourEmbed.classList.remove('virtual-tour-active-container', 'virtual-tour-embed--active');
 
       if (tourPoster) {
         tourPoster.style.display = 'flex';

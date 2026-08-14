@@ -197,6 +197,48 @@ iframe {
     box-sizing: border-box;
   }
 
+  /* Khusus Mobile: Fullscreen Overlay Container ketika Virtual Tour aktif */
+  .virtual-tour-embed.virtual-tour-active-container,
+  .virtual-tour-embed.virtual-tour-embed--active {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    z-index: 99999 !important;
+    background: #000000 !important;
+  }
+
+  .virtual-tour-embed.virtual-tour-active-container iframe,
+  .virtual-tour-embed.virtual-tour-embed--active iframe {
+    display: block !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .virtual-tour-embed.virtual-tour-active-container .vt-overlay-controls,
+  .virtual-tour-embed.virtual-tour-embed--active .vt-overlay-controls {
+    z-index: 100000 !important;
+  }
+
   .vt-overlay-controls {
     padding: 10px 12px;
   }
