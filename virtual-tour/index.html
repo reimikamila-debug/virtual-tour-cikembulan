@@ -246,14 +246,28 @@
                         {
                             var viewer = document.querySelector('#viewer');
                             if (!viewer) return;
-                            var scale = window.innerWidth / document.documentElement.clientWidth;
-                            var width = document.documentElement.clientWidth;
-                            var height = Math.round(window.innerHeight / scale);
-                            viewer.style.width = width + 'px';
-                            viewer.style.height = height + 'px';
-                            viewer.style.left = Math.round((window.innerWidth - width) * 0.5) + 'px';
-                            viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
-                            viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
+                            var winWidth = window.innerWidth;
+                            var docWidth = document.documentElement.clientWidth;
+
+                            if (winWidth <= 768) {
+                                var targetWidth = winWidth <= 380 ? 740 : 700;
+                                var scale = winWidth / targetWidth;
+                                var height = Math.round(window.innerHeight / scale);
+                                viewer.style.width = targetWidth + 'px';
+                                viewer.style.height = height + 'px';
+                                viewer.style.left = Math.round((winWidth - targetWidth) * 0.5) + 'px';
+                                viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
+                                viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
+                            } else {
+                                var scale = winWidth / docWidth;
+                                var width = docWidth;
+                                var height = Math.round(window.innerHeight / scale);
+                                viewer.style.width = width + 'px';
+                                viewer.style.height = height + 'px';
+                                viewer.style.left = Math.round((winWidth - width) * 0.5) + 'px';
+                                viewer.style.top = Math.round((window.innerHeight - height) * 0.5) + 'px';
+                                viewer.style.transform = 'scale(' + scale + ', ' + scale + ')';
+                            }
                             window.scrollTo(0,0);
                         }, delay);
                     });
@@ -325,6 +339,111 @@
 
         #viewer { background-color: #FFFFFF; z-index:1; position:absolute; width: 100%; height: 100%; top: 0; }
         #preloadContainer { z-index:2; position:relative; width:100%; height:100%; transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -o-transition: opacity 0.5s;}
+
+        /* Khusus Mobile: Lebar & Ukuran Sidebar Hijau 3DVista */
+        @media (max-width: 768px) {
+            #viewer [id*="Container_A464A822"],
+            #viewer [id*="Container_A464D822"],
+            #viewer [id*="Container_A464E822"],
+            #viewer [id*="Container_A464F822"],
+            #viewer [id*="Container_A4642822"],
+            #viewer [id*="Container_A4670825"],
+            #viewer [id*="Container_A46"] {
+                width: 42vw !important;
+                max-width: 170px !important;
+                min-width: 140px !important;
+            }
+
+            #viewer img[src*="logo"],
+            #viewer [id*="Image_1E18723C"] img,
+            #viewer [id*="Image_ACD186F4"] img {
+                max-width: 100px !important;
+                height: auto !important;
+                margin: 0 auto !important;
+                display: block !important;
+            }
+
+            #viewer [id*="Button_A4644822"],
+            #viewer [id*="Button_A4659822"],
+            #viewer [id*="Button_A465B822"],
+            #viewer [id*="Button_D88EA450"],
+            #viewer [id*="Button_A4658823"],
+            #viewer [id*="Button_A465C823"],
+            #viewer [id*="Button_A465E823"] {
+                font-size: 14px !important;
+                padding-left: 4px !important;
+                padding-right: 4px !important;
+                line-height: 1.2 !important;
+            }
+
+            #viewer [id*="Container_A4645822"],
+            #viewer [id*="Container_A4647822"],
+            #viewer [id*="Container_A4658822"],
+            #viewer [id*="Container_A465A822"] {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            #viewer [id*="Container_A4651824"],
+            #viewer [id*="Container_A4650824"],
+            #viewer [id*="Button_A4655824"],
+            #viewer [id*="Button_A4657824"],
+            #viewer [id*="Button_A4656824"] {
+                width: 40px !important;
+                height: 40px !important;
+                gap: 8px !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+            }
+
+            #viewer [id*="Container_A4651824"] img,
+            #viewer [id*="Container_A4650824"] img,
+            #viewer [id*="Button_A4655824"] img,
+            #viewer [id*="Button_A4657824"] img,
+            #viewer [id*="Button_A4656824"] img {
+                width: 38px !important;
+                height: 38px !important;
+            }
+
+            #viewer [id*="Button_A4640824"],
+            #viewer [id*="Button_A4643824"] {
+                width: 44px !important;
+                height: 44px !important;
+            }
+
+            #viewer [id*="Button_A4640824"] img,
+            #viewer [id*="Button_A4643824"] img {
+                width: 44px !important;
+                height: 44px !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            #viewer [id*="Container_A464A822"],
+            #viewer [id*="Container_A464D822"],
+            #viewer [id*="Container_A464E822"],
+            #viewer [id*="Container_A464F822"],
+            #viewer [id*="Container_A4642822"],
+            #viewer [id*="Container_A4670825"],
+            #viewer [id*="Container_A46"] {
+                width: 40vw !important;
+                max-width: 155px !important;
+                min-width: 130px !important;
+            }
+
+            #viewer img[src*="logo"],
+            #viewer [id*="Image_1E18723C"] img,
+            #viewer [id*="Image_ACD186F4"] img {
+                max-width: 85px !important;
+            }
+
+            #viewer [id*="Button_A4644822"],
+            #viewer [id*="Button_A4659822"],
+            #viewer [id*="Button_A465B822"],
+            #viewer [id*="Button_D88EA450"] {
+                font-size: 13px !important;
+            }
+        }
     </style>
     <link rel="stylesheet" href="fonts.css?v=1786704760989">
 </head>
