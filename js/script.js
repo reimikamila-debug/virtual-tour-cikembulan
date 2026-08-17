@@ -137,7 +137,7 @@
     },
     {
       id: 22,
-      src: 'assets/images/gallery/Binturong.peg',
+      src: 'assets/images/gallery/Binturong.jpeg',
       alt: 'Binturong di Taman Satwa Cikembulan',
       caption: 'Binturong'
     },
