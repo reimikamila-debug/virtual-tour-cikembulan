@@ -1165,7 +1165,7 @@
     // Launch Virtual Tour in new tab upon confirmation
     function launchTour() {
       closeModal();
-      window.open('virtual-tour/index.html', '_blank');
+      window.open(VIRTUAL_TOUR_URL, '_blank');
     }
 
     if (startBtn) {
