@@ -1145,12 +1145,28 @@
     const startBtn = $('#start-tour-btn');
     const confirmModal = $('#vt-confirm-modal');
     const modalBackdrop = $('#vt-modal-backdrop');
+    const step1 = $('#vt-modal-step-1');
+    const step2 = $('#vt-modal-step-2');
+    const btnNext = $('#vt-btn-next');
     const btnCancel = $('#vt-btn-cancel');
     const btnYes = $('#vt-btn-yes');
 
-    // Open Modal ("Apakah Anda ingin memulai Virtual Tour?")
+    function showStep(stepNumber) {
+      if (step1 && step2) {
+        if (stepNumber === 1) {
+          step1.classList.add('vt-modal__step--active');
+          step2.classList.remove('vt-modal__step--active');
+        } else if (stepNumber === 2) {
+          step1.classList.remove('vt-modal__step--active');
+          step2.classList.add('vt-modal__step--active');
+        }
+      }
+    }
+
+    // Open Modal (Always start at Pop-up 1: "Informasi Penilaian")
     function openModal() {
       if (!confirmModal) return;
+      showStep(1);
       confirmModal.classList.add('vt-modal--active');
       confirmModal.setAttribute('aria-hidden', 'false');
     }
@@ -1162,6 +1178,11 @@
       confirmModal.setAttribute('aria-hidden', 'true');
     }
 
+    // Move to Step 2: "Memulai Virtual Tour"
+    function goToStep2() {
+      showStep(2);
+    }
+
     // Launch Virtual Tour in new tab upon confirmation
     function launchTour() {
       closeModal();
@@ -1170,6 +1191,10 @@
 
     if (startBtn) {
       startBtn.addEventListener('click', openModal);
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', goToStep2);
     }
 
     if (btnCancel) {

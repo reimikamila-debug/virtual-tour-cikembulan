@@ -187,13 +187,14 @@
             </div>
             <h2 class="section-title">Taman Satwa Cikembulan</h2>
             <p>
-              Taman Satwa Cikembulan merupakan destinasi edukasi dan rekreasi keluarga yang menghadirkan beragam koleksi
-              satwa dalam lingkungan yang asri dan alami. Taman ini bertujuan memberikan pengalaman belajar tentang
-              keanekaragaman hayati bagi pengunjung dari segala usia.
+              Taman Satwa Cikembulan merupakan destinasi wisata edukasi dan rekreasi di Kabupaten Garut, Jawa Barat.
+              Taman satwa ini mulai dibangun pada tahun 1999 dan dibuka untuk umum pada tahun 2009 setelah memperoleh
+              izin dari Kementerian Kehutanan.
             </p>
             <p>
-              Dengan komitmen terhadap konservasi dan edukasi, Taman Satwa Cikembulan berupaya menjadi sarana pengenalan
-              satwa yang menyenangkan sekaligus bermakna bagi masyarakat dan lingkungan sekitar.
+              Saat ini, Taman Satwa Cikembulan memiliki luas sekitar 5 hektar dengan koleksi <strong>111 jenis
+                satwa</strong> atau <strong>total 431 ekor</strong>, yang terdiri atas mamalia, reptil, burung, dan
+              karnivora besar. Berbagai fasilitas juga tersedia untuk mendukung kenyamanan dan pengalaman pengunjung.
             </p>
 
             <div class="about__features">
@@ -281,7 +282,26 @@
       aria-describedby="vt-modal-desc-1">
       <div class="vt-modal__backdrop" id="vt-modal-backdrop"></div>
       <div class="vt-modal__card">
+        <!-- Step 1: Pop-up Informasi Penilaian -->
         <div class="vt-modal__step vt-modal__step--active" id="vt-modal-step-1">
+          <div class="vt-modal__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </div>
+          <h3 class="vt-modal__title" id="vt-modal-title-1">Informasi Penilaian</h3>
+          <p class="vt-modal__desc" id="vt-modal-desc-1">Setelah selesai mencoba Virtual Tour 360° Taman Satwa Cikembulan, jangan lupa klik ikon link yang tersedia di dalam Virtual Tour untuk melanjutkan pengisian penilaian.</p>
+          <div class="vt-modal__actions">
+            <button type="button" class="btn btn--primary vt-modal__btn vt-modal__btn--start"
+              id="vt-btn-next" style="width: 100%;">Lanjut</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Pop-up Memulai Virtual Tour -->
+        <div class="vt-modal__step" id="vt-modal-step-2">
           <div class="vt-modal__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" aria-hidden="true">
@@ -289,8 +309,8 @@
               <polygon points="10 8 16 12 10 16 10 8" />
             </svg>
           </div>
-          <h3 class="vt-modal__title" id="vt-modal-title-1">Memulai Virtual Tour</h3>
-          <p class="vt-modal__desc" id="vt-modal-desc-1">Apakah Anda ingin memulai Virtual Tour?</p>
+          <h3 class="vt-modal__title" id="vt-modal-title-2">Memulai Virtual Tour</h3>
+          <p class="vt-modal__desc" id="vt-modal-desc-2">Apakah Anda ingin memulai Virtual Tour?</p>
           <div class="vt-modal__actions">
             <button type="button" class="btn vt-modal__btn vt-modal__btn--cancel" id="vt-btn-cancel">Batal</button>
             <button type="button" class="btn btn--primary vt-modal__btn vt-modal__btn--start"

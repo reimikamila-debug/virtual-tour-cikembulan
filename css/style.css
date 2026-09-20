@@ -928,6 +928,14 @@ h4 {
   transform: scale(1) translateY(0);
 }
 
+.vt-modal__step {
+  display: none;
+}
+
+.vt-modal__step--active {
+  display: block;
+}
+
 .vt-modal__icon {
   width: 64px;
   height: 64px;
