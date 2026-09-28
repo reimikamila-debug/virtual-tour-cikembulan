@@ -8,7 +8,7 @@
   /* ---------------------------------------------------------------
      DATA: Galeri
      --------------------------------------------------------------- */
-  const galleryData = [
+  let galleryData = [
     {
       id: 1,
       src: 'assets/images/gallery/harimau.jpeg',
@@ -290,6 +290,20 @@
       src: 'assets/images/gallery/spotfoto2.png',
       alt: 'Area spot foto di Taman Satwa Cikembulan',
       caption: 'Area Spot Foto',
+      category: 'area-wahana'
+    },
+    {
+      id: 46,
+      src: 'assets/images/gallery/feeding_rusa.png',
+      alt: 'Feeding Rusa di Taman Satwa Cikembulan',
+      caption: 'Feeding Rusa',
+      category: 'area-wahana'
+    },
+    {
+      id: 47,
+      src: 'assets/images/gallery/odong-odong_kereta.jpeg',
+      alt: 'Kereta Odong-odong di Taman Satwa Cikembulan',
+      caption: 'Kereta Odong-odong',
       category: 'area-wahana'
     }
   ];
@@ -788,17 +802,19 @@
     const loadMoreContainer = $('#gallery-load-more');
     const loadMoreBtn = $('#gallery-load-more-btn');
 
-    const lightbox = $('.lightbox');
-    const lightboxImage = $('.lightbox__image');
-    const lightboxCaption = $('.lightbox__caption');
-    const lightboxClose = $('.lightbox__close');
-    const lightboxPrevious = $('.lightbox__nav--prev');
-    const lightboxNext = $('.lightbox__nav--next');
+    // Detail Modal Elements
+    const detailOverlay = $('#gallery-modal');
+    const detailModalCard = $('#gallery-modal-card');
+    const detailClose = $('#gallery-modal-close');
+    const detailPhoto = $('#gallery-modal-photo');
+    const detailTitle = $('#gallery-modal-title');
+    const detailEyebrow = $('#gallery-modal-eyebrow');
+    const detailJenis = $('#gallery-modal-jenis');
+    const detailDitambahkan = $('#gallery-modal-ditambahkan');
 
     let currentFilter = 'hewan';
     let visibleCount = getBatchSize();
     let filteredGalleryData = [];
-    let currentIndex = 0;
     let focusedBefore = null;
 
     function getBatchSize() {
@@ -840,7 +856,9 @@
 
       grid.innerHTML = visibleItems
         .map(
-          (item, index) => `
+          (item, index) => {
+            const imgSrc = (item.src && item.src.startsWith('data:')) ? item.src : encodeURI(item.src || '');
+            return `
             <div
               class="gallery__item reveal"
               tabindex="0"
@@ -848,20 +866,42 @@
               aria-label="Buka foto: ${item.caption}"
               data-index="${index}"
             >
-              <img
-                src="${item.src}"
-                alt="${item.alt}"
-                loading="lazy"
-                decoding="async"
-              >
+              ${item.src ? `
+                <img
+                  src="${imgSrc}"
+                  alt="${item.alt}"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';"
+                >
+                <div class="gallery__item-placeholder" style="display:none;">
+                  <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#6c9673" stroke-width="1.5">
+                    <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                  <span>Belum ada foto</span>
+                </div>
+              ` : `
+                <div class="gallery__item-placeholder">
+                  <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#6c9673" stroke-width="1.5">
+                    <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                  <span>Belum ada foto</span>
+                </div>
+              `}
 
               <div class="gallery__item-overlay">
-                <span class="gallery__item-caption">
-                  ${item.caption}
-                </span>
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <span class="gallery__item-caption">
+                    ${item.caption}
+                  </span>
+                  ${item.jenis ? `<small style="color: #c5df4d; font-size: 0.75rem; font-weight: 600;">${item.jenis}</small>` : ''}
+                </div>
               </div>
             </div>
-          `
+          `;
+          }
         )
         .join('');
 
@@ -901,57 +941,62 @@
       });
     }
 
-    function updateLightbox() {
-      const item = filteredGalleryData[currentIndex];
+    // ---- DETAIL MODAL (sama seperti admin) ----
+    function openDetailModal(index) {
+      const item = filteredGalleryData[index];
+      if (!item || !detailOverlay) return;
 
-      if (!item) return;
+      focusedBefore = document.activeElement;
 
-      if (lightboxImage) {
-        if (lightboxImage.tagName === 'IMG') {
-          lightboxImage.src = item.src;
-          lightboxImage.alt = item.alt;
+      // Photo
+      if (detailPhoto) {
+        if (item.src && item.src !== 'assets/images/logo-cikembulan.png') {
+          const imgSrc = (item.src.startsWith('data:')) ? item.src : encodeURI(item.src);
+          detailPhoto.innerHTML = `<img src="${imgSrc}" alt="${item.alt || item.caption}" style="width:100%;height:100%;min-height:360px;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='<div class=\\'detail-photo-empty\\'><svg viewBox=\\'0 0 24 24\\' width=\\'40\\' height=\\'40\\' fill=\\'none\\' stroke=\\'#6c9673\\' stroke-width=\\'1.5\\'><path d=\\'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z\\'/><circle cx=\\'12\\' cy=\\'10\\' r=\\'3\\'/></svg><span>Belum ada foto</span></div>'" />`;
         } else {
-          lightboxImage.innerHTML = `
-            <img
-              src="${item.src}"
-              alt="${item.alt}"
-              decoding="async"
-            >
-          `;
+          detailPhoto.innerHTML = `<div class="detail-photo-empty"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#6c9673" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg><span>Belum ada foto</span></div>`;
         }
       }
 
-      if (lightboxCaption) {
-        lightboxCaption.textContent = item.caption;
+      // Content
+      if (detailTitle) detailTitle.textContent = item.caption || '-';
+      if (detailEyebrow) detailEyebrow.textContent = (item.category === 'area-wahana') ? 'DETAIL AREA & WAHANA' : 'DETAIL HEWAN';
+
+      // Grid details — hide rows if data not available (e.g. area-wahana)
+      const gridEl = $('#gallery-modal-grid');
+      if (gridEl) {
+        if (item.jenis || item.created_at) {
+          gridEl.style.display = '';
+          if (detailJenis) detailJenis.textContent = item.jenis || '-';
+          if (detailDitambahkan) {
+            if (item.created_at) {
+              try {
+                detailDitambahkan.textContent = new Date(item.created_at).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
+              } catch (e) {
+                detailDitambahkan.textContent = '-';
+              }
+            } else {
+              detailDitambahkan.textContent = '-';
+            }
+          }
+        } else {
+          gridEl.style.display = 'none';
+        }
       }
-    }
 
-    function openLightbox(index) {
-      if (!lightbox) return;
-
-      if (!Number.isInteger(index) || !filteredGalleryData[index]) {
-        return;
-      }
-
-      focusedBefore = document.activeElement;
-      currentIndex = index;
-
-      updateLightbox();
-
-      lightbox.classList.add('lightbox--active');
-      lightbox.setAttribute('aria-hidden', 'false');
+      detailOverlay.classList.add('detail-overlay--active');
+      detailOverlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
 
-      if (lightboxClose) {
-        lightboxClose.focus();
+      if (detailClose) {
+        setTimeout(() => detailClose.focus(), 50);
       }
     }
 
-    function closeLightbox() {
-      if (!lightbox) return;
-
-      lightbox.classList.remove('lightbox--active');
-      lightbox.setAttribute('aria-hidden', 'true');
+    function closeDetailModal() {
+      if (!detailOverlay) return;
+      detailOverlay.classList.remove('detail-overlay--active');
+      detailOverlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
 
       if (focusedBefore instanceof HTMLElement) {
@@ -959,116 +1004,154 @@
       }
     }
 
-    function nextImage() {
-      const total = Math.min(visibleCount, filteredGalleryData.length);
-      if (total === 0) return;
-
-      currentIndex = (currentIndex + 1) % total;
-      updateLightbox();
+    if (detailClose) {
+      detailClose.addEventListener('click', closeDetailModal);
     }
 
-    function previousImage() {
-      const total = Math.min(visibleCount, filteredGalleryData.length);
-      if (total === 0) return;
-
-      currentIndex = (currentIndex - 1 + total) % total;
-      updateLightbox();
-    }
-
-    grid.addEventListener('click', (event) => {
-      if (!(event.target instanceof Element)) {
-        return;
-      }
-
-      const item = event.target.closest('.gallery__item');
-      if (!item) return;
-
-      const index = Number.parseInt(item.dataset.index || '', 10);
-      openLightbox(index);
-    });
-
-    grid.addEventListener('keydown', (event) => {
-      if (event.key !== 'Enter' && event.key !== ' ') {
-        return;
-      }
-
-      if (!(event.target instanceof Element)) {
-        return;
-      }
-
-      const item = event.target.closest('.gallery__item');
-      if (!item) return;
-
-      event.preventDefault();
-      const index = Number.parseInt(item.dataset.index || '', 10);
-      openLightbox(index);
-    });
-
-    if (lightbox) {
-      lightbox.setAttribute('aria-hidden', 'true');
-
-      lightbox.addEventListener('click', (event) => {
-        if (event.target === lightbox) {
-          closeLightbox();
+    if (detailOverlay) {
+      detailOverlay.addEventListener('click', (event) => {
+        if (event.target === detailOverlay) {
+          closeDetailModal();
         }
       });
-
-      lightbox.addEventListener('keydown', (event) => {
-        if (event.key !== 'Tab') {
-          return;
-        }
-
-        const focusables = $$(
-          'button:not([disabled]), a[href], input:not([disabled]), [tabindex="0"]',
-          lightbox
-        ).filter((element) => element.offsetParent !== null);
-
-        if (focusables.length === 0) return;
-
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      });
-    }
-
-    if (lightboxClose) {
-      lightboxClose.addEventListener('click', closeLightbox);
-    }
-
-    if (lightboxPrevious) {
-      lightboxPrevious.addEventListener('click', previousImage);
-    }
-
-    if (lightboxNext) {
-      lightboxNext.addEventListener('click', nextImage);
     }
 
     document.addEventListener('keydown', (event) => {
-      if (!lightbox || !lightbox.classList.contains('lightbox--active')) {
-        return;
-      }
-
-      if (event.key === 'Escape') {
-        closeLightbox();
-      }
-
-      if (event.key === 'ArrowLeft') {
-        previousImage();
-      }
-
-      if (event.key === 'ArrowRight') {
-        nextImage();
+      if (
+        event.key === 'Escape' &&
+        detailOverlay &&
+        detailOverlay.classList.contains('detail-overlay--active')
+      ) {
+        closeDetailModal();
       }
     });
 
-    renderGallery();
+    // Open modal on click
+    grid.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
+      const item = event.target.closest('.gallery__item');
+      if (!item) return;
+      const index = Number.parseInt(item.dataset.index || '', 10);
+      if (!Number.isNaN(index)) openDetailModal(index);
+    });
+
+    // Open modal on keyboard Enter/Space
+    grid.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (!(event.target instanceof Element)) return;
+      const item = event.target.closest('.gallery__item');
+      if (!item) return;
+      event.preventDefault();
+      const index = Number.parseInt(item.dataset.index || '', 10);
+      if (!Number.isNaN(index)) openDetailModal(index);
+    });
+
+    // Initial Loading State
+    grid.innerHTML = `
+      <div class="gallery__loading" style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted); padding: 2.5rem 1rem;">
+        <p style="margin: 0; font-size: 0.95rem; font-weight: 500;">⏳ Memuat data galeri hewan...</p>
+      </div>
+    `;
+
+    const staticBackup = [...galleryData];
+
+    function getLocalAnimals() {
+      try {
+        const saved = localStorage.getItem('kebun_animals');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+      return [];
+    }
+
+    function processAnimalsList(animalsList) {
+      // Build lookup map for static images by caption / nama_hewan
+      const staticMap = new Map();
+      staticBackup.forEach((item) => {
+        if (item.caption && item.src) {
+          staticMap.set(item.caption.toLowerCase().trim(), item.src);
+        }
+      });
+
+      const dbItems = (Array.isArray(animalsList) && animalsList.length > 0)
+        ? animalsList.map((animal, idx) => {
+            const nameLower = (animal.nama_hewan || '').toLowerCase().trim();
+            const fallbackSrc = staticMap.get(nameLower) || '';
+            return {
+              id: animal.id || `animal-${idx}`,
+              src: animal.foto || fallbackSrc,
+              alt: `${animal.nama_hewan} di Taman Satwa Cikembulan`,
+              caption: animal.nama_hewan,
+              jenis: animal.jenis,
+              ukuran: animal.ukuran,
+              jenis_kelamin: animal.jenis_kelamin,
+              created_at: animal.created_at || new Date().toISOString(),
+              category: 'hewan'
+            };
+          })
+        : staticBackup.filter((item) => (item.category || '').toLowerCase() === 'hewan' || !item.category);
+
+      const areaItems = staticBackup.filter((item) => (item.category || '').toLowerCase() === 'area-wahana');
+      galleryData = [...dbItems, ...areaItems];
+      return true;
+    }
+
+    const SUPABASE_URL = 'https://dltwibgfkhuxobzigvpy.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsdHdpYmdma2h1eG9iemlndnB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0ODAwNzksImV4cCI6MjEwNTA1NjA3OX0.gJcT8sHoWp5gzB-kNfOfVNNkODmVC6cTHt_RhOCL3e0';
+
+    async function loadAnimalsFromSupabase() {
+      // 1. Prioritas Utama: Mengambil data langsung dari Supabase REST API
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/hewan?select=*&order=created_at.desc`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+        if (res.ok) {
+          const dbAnimals = await res.json();
+          if (Array.isArray(dbAnimals) && dbAnimals.length > 0) {
+            processAnimalsList(dbAnimals);
+            renderGallery();
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal memuat langsung dari Supabase REST, beralih ke fallback API:', err);
+      }
+
+      // 2. Fallback: Mengambil data dari backend Express API jika tersedia
+      try {
+        const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '3000'
+          ? 'http://localhost:3000/api/hewan'
+          : '/api/hewan';
+        const res = await fetch(apiUrl);
+        if (res.ok) {
+          const dbAnimals = await res.json();
+          const list = Array.isArray(dbAnimals) ? dbAnimals : (dbAnimals.hewan || dbAnimals.data || []);
+          if (Array.isArray(list) && list.length > 0) {
+            processAnimalsList(list);
+            renderGallery();
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend API tidak dapat dijangkau:', err);
+      }
+
+      // 3. Fallback Cadangan: Cache lokal atau data statis bawaan
+      const local = getLocalAnimals();
+      if (local.length > 0) {
+        processAnimalsList(local);
+      } else {
+        processAnimalsList([]);
+      }
+      renderGallery();
+    }
+
+    loadAnimalsFromSupabase();
   }
 
   /* ---------------------------------------------------------------
